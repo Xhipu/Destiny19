@@ -1,4 +1,4 @@
-package de.destiny19;
+package de.destiny19.Destiny19;
 
 
 public class MainWindow{
