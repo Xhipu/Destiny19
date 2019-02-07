@@ -83,6 +83,8 @@ public class Player {
         if((nAktEp + _nAktEp) >= nMaxEp){
             nAktEp = 0;
             addLevel(1);
+            int nRest = (_nAktEp + nAktEp) - nMaxEp;
+            getEp(nRest);
         } else{
             nAktEp += _nAktEp;
         }
@@ -106,9 +108,9 @@ public class Player {
 
     public void getHeal (int _nHeal) {
         if((nAktHP += _nHeal) >= nHP) {
-            nAktHP += _nHeal;
-        } else {
             nAktHP = nHP;
+        } else {
+            nAktHP += _nHeal;
         }
         
     }
