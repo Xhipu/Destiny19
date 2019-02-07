@@ -1,6 +1,6 @@
-package de.destiny19.Destiny19;
+package de.destiny19.player;
 
-class PlayerInventory {
+public class PlayerInventory {
     private int nGold;
     private int nWood;
     private int nStone;
@@ -70,7 +70,7 @@ class PlayerInventory {
     }
 
     public void addCopper (int _n) {
-        nCopper += _nCopper;
+        nCopper += _n;
     }
 
     public void removeCopper (int _nCopper) {
@@ -177,7 +177,7 @@ class PlayerInventory {
         return nDarkEssence;
     }
 
-    public void addLightEssence (int _nIceEssence) {
+    public void addLightEssence (int _nLightEssence) {
         nLightEssence += _nLightEssence;
     }
 
