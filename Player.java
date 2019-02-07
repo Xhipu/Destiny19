@@ -4,6 +4,8 @@ public class Player {
     private int nLevel;
     private int nStatPoints;
     private int nSkillPoints;
+    private int nAktEp;
+    private int nMaxEp;
     private int nHP;
     private int nAktHP;
     private int nMP;
@@ -16,10 +18,11 @@ public class Player {
     private int nSkillLevelEarth;
     private int nSkillLevelBlood;
 
-    Player(int _nLevel, int _nStatPoints, int _nSkillPoints, int _nHP, int _nMP, int _nStrength, int _nDefence, int _nIntelligence, int nSkillLevelFire, int _nSkillLevelIce, int _nSkillLevelEarth, int _nSkillLevelBlood) {
+    Player(int _nLevel, int _nStatPoints, int _nSkillPoints, int _nAktEp, int _nHP, int _nMP, int _nStrength, int _nDefence, int _nIntelligence, int nSkillLevelFire, int _nSkillLevelIce, int _nSkillLevelEarth, int _nSkillLevelBlood) {
         nLevel = _nLevel;
         nStatPoints = _nStatPoints;
         nSkillPOints = _nSkillPoints;
+        nAktEp = _nAktEp;
         nHP = _nHP;
         nMP = _nMP;
         nStrength = _nStrength;
@@ -33,6 +36,14 @@ public class Player {
 
     public void addLevel (int _nLevel) {
         nLevel += _nLevel;
+        addStatPoints(3);
+        addSkillPoints(1);
+        setMaxEp((50 * 3 ^ nLevel));
+        addStrength(1);
+        addIntelligence(1);
+        addHP(5);
+        addMP(5);
+        addDefence(1);
     }
 
     public int getLevel () {
@@ -63,6 +74,24 @@ public class Player {
         return nSkillPoints;
     }
 
+    public void setMaxEp (int _nMaxEp) {
+        nMaxEp = _nMaxEp;
+    }
+
+    public void getEp (int _nAktEp) {
+        _nAktEp = _nAktEp * 2 ^ nLevel;
+        if((nAktEp + _nAktEp) >= nMaxEp){
+            nAktEp = 0;
+            addLevel(1);
+        } else{
+            nAktEp += _nAktEp;
+        }
+    }
+
+    public int getAktEp () {
+        return nAktEp;
+    }
+
     public void addHP (int _nHP) {
         nHP += _nHP;
     }
@@ -72,7 +101,7 @@ public class Player {
     }
     
     public void setAktHP () {
-        nAktHP = nHP;
+        nAktHP = getHP();
     }
 
     public void getHeal (int _nHeal) {
