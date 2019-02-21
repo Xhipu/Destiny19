@@ -7,7 +7,7 @@ public class PlayerInventory {
     private int nCopper;
     private int nIron;
     private int nSteel;
-    private int nObisidian;
+    private int nObsidian;
     private int nEntHearth;
     private int nDeamonSoul;
     private int nFlameEssence;
@@ -16,14 +16,14 @@ public class PlayerInventory {
     private int nLightEssence;
     private int nPinkFluffyUnicornHorn;
 
-    PlayerInventory(int _nGold, int _nWood, int _nStone, int _nCopper, int _nIron, int _nSteel, int _nObisidian, int _nEntHearth, int _nDeamonSoul, int _nFlameEssence, int _nIceEssence, int _nDarkEssence, int _nLightEssence, int _nPinkFluffyUnicornHorn) {
+    PlayerInventory(int _nGold, int _nWood, int _nStone, int _nCopper, int _nIron, int _nSteel, int _nObsidian, int _nEntHearth, int _nDeamonSoul, int _nFlameEssence, int _nIceEssence, int _nDarkEssence, int _nLightEssence, int _nPinkFluffyUnicornHorn) {
         nGold = _nGold;
         nWood = _nWood;
         nStone = _nStone;
         nCopper = _nCopper;
         nIron = _nIron;
         nSteel = _nSteel;
-        nObisidian = _nObisidian;
+        nObsidian = _nObsidian;
         nEntHearth = _nEntHearth;
         nDeamonSoul = _nDeamonSoul;
         nFlameEssence = _nFlameEssence;
@@ -106,15 +106,15 @@ public class PlayerInventory {
     }
 
     public void addObisian (int _nObisidian) {
-        nObisidian += _nObisidian;
+        nObsidian += _nObisidian;
     }
 
     public void removeObsidian (int _nObsidian) {
-        nObisidian -= _nObsidian;
+        nObsidian -= _nObsidian;
     }
 
-    public int getObisdian () {
-        return nObisidian;
+    public int getObsidian () {
+        return nObsidian;
     }
     
     public void addEntHearth (int _nEntHearth) {

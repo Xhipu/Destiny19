@@ -16,12 +16,14 @@ public class Player {
     private int nSkillLevelEarth;
     private int nSkillLevelBlood;
 
-    Player(int _nLevel, int _nStatPoints, int _nSkillPoints, int _nHP, int _nMP, int _nStrength, int _nDefence, int _nIntelligence, int _nSkillLevelFire, int _nSkillLevelIce, int _nSkillLevelEarth, int _nSkillLevelBlood) {
+    Player(int _nLevel, int _nStatPoints, int _nSkillPoints, int _nHP,int _nAktHP, int _nMP, int _nAktMP, int _nStrength, int _nDefence, int _nIntelligence, int _nSkillLevelFire, int _nSkillLevelIce, int _nSkillLevelEarth, int _nSkillLevelBlood) {
         nLevel = _nLevel;
         nStatPoints = _nStatPoints;
         nSkillPoints = _nSkillPoints;
         nHP = _nHP;
+        nAktHP = _nAktHP;
         nMP = _nMP;
+        nAktMP = _nAktMP;
         nStrength = _nStrength;
         nDefence = _nDefence;
         nIntelligence = _nIntelligence;
@@ -74,6 +76,10 @@ public class Player {
     public void setAktHP () {
         nAktHP = nHP;
     }
+    
+    public int getAktHP () {
+    	return nAktHP;
+    }
 
     public void getHeal (int _nHeal) {
         if((nAktHP += _nHeal) >= nHP) {
@@ -101,6 +107,10 @@ public class Player {
     public void setAktMP () {
         nAktMP = nMP;
     }
+    
+    public int getAktMP () {
+    	return nAktMP;
+    }
 
     public void getMana (int _nMP) {
         if((nAktMP + _nMP) >= nMP) {
@@ -114,7 +124,7 @@ public class Player {
         if(nAktMP < _nMP) {
             return false;
         } else {
-            nAktHP -= _nMP;
+            nAktMP -= _nMP;
             return true;
         }
     }
