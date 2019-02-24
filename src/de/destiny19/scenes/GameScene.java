@@ -9,10 +9,9 @@ import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Game;
-import de.destiny19.game.IGame;
 import de.destiny19.ui.UIButton;
 
-public class GameScene extends JPanel implements IGame {
+public class GameScene extends JPanel {
 	private static final long serialVersionUID = 7486454402469771687L;
 	private Canvas canvas;
 	private UIButton bnPause;

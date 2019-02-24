@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-public class Game implements Runnable, IGame {
+public class Game implements Runnable {
 	public static PrintStream devstream;
 	
 	public static enum GAMECONFIG {
@@ -53,23 +53,7 @@ public class Game implements Runnable, IGame {
 		this.gThread = gThread;
 	}
 	
-	public synchronized void start(String param /*start in debug or release*/) {
-		switch (param) {
-		case "-d":
-		case "-D":
-			devstream = System.out;
-			break;
-		case "-r":
-		case "-R":
-		case "":
-		default:
-			devstream = new PrintStream(new OutputStream() {
-				@Override
-				public void write(int e) throws IOException {}
-			});
-			break;
-		}
-		
+	public synchronized void start() {
 		mainframe = new Frame(GAMESTATE.TITLE);
 		devstream.println("Starting game loop");
 		gThread = new Thread(this);
@@ -105,27 +89,34 @@ public class Game implements Runnable, IGame {
 		} while (lnStop - lnStart <= lnTime);
 	}
 
-	@Override
 	public void processInput() {
 		
 	}
 
-	@Override
 	public void updateGameState() {
 		
 	}
 
-	@Override
 	public void render() {
 		mainframe.render();
 	}
 	
-	public Game() {
-	}
-	
 	public static void main(String args[]) {
+		try {
+			if(args[0].equals("-d")) {
+				System.out.println("Starting in debug");
+				devstream = System.out;
+			} else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			System.out.println("Starting in release");
+			devstream = new PrintStream(new OutputStream() {
+				public void write(int arg0) throws IOException {return;}
+			});
+		}
 		Game game = new Game();
-		game.start(args[0]);
+		game.start();
 	}
 
 	public Frame getMainframe() {

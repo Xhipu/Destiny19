@@ -41,7 +41,7 @@ public class TitleScene extends JPanel {
 		bnquit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				parent.dispose();
+				System.exit(0);
 			}
 		});
 		
