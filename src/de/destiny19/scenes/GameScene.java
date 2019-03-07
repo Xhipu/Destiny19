@@ -1,6 +1,5 @@
 package de.destiny19.scenes;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,7 +14,6 @@ import de.destiny19.ui.UIStaticPanel;
 
 public class GameScene extends JPanel {
 	private static final long serialVersionUID = 7486454402469771687L;
-	private Canvas canvas;
 	private UIButton bnPause;
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
 	private UILog pnLog;
@@ -32,9 +30,6 @@ public class GameScene extends JPanel {
 		pnSkills = new UIStaticPanel(450, 50, 100, 650);
 		pnLog = new UILog(950, 565, getWidth()-955, getHeight()-600);
 		
-		canvas = new Canvas();
-		canvas.setSize(getSize());
-		
 		bnPause = new UIButton("II", getWidth()-65, 0, 60, 60);
 		bnPause.addMouseListener(new MouseAdapter() {
 			@Override
@@ -43,7 +38,6 @@ public class GameScene extends JPanel {
 			}
 		});
 		
-		//add(canvas);
 		add(bnPause);
 		add(pnEnemy);
 		add(pnEnemyStats);
