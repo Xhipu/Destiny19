@@ -1,5 +1,8 @@
 package de.destiny19.player;
 
+import de.destiny19.game.Game;
+import de.destiny19.game.Timer;
+
 public class Player {
     private int nLevel;
     private int nStatPoints;
@@ -17,6 +20,7 @@ public class Player {
     private int nSkillLevelIce;
     private int nSkillLevelEarth;
     private int nSkillLevelBlood;
+    private Timer m_timer;
 
     public Player(int _nLevel, int _nStatPoints, int _nSkillPoints, int _nEP, int _nAktEP, int _nHP,int _nAktHP, int _nMP, int _nAktMP, int _nStrength, int _nDefence, int _nIntelligence, int _nSkillLevelFire, int _nSkillLevelIce, int _nSkillLevelEarth, int _nSkillLevelBlood) {
         nLevel = _nLevel;
@@ -35,6 +39,12 @@ public class Player {
         nSkillLevelIce = _nSkillLevelIce;
         nSkillLevelEarth = _nSkillLevelEarth;
         nSkillLevelBlood = _nSkillLevelBlood;
+        setTimer(new Timer() {
+			@Override
+			public void doAction() {
+				Game.devstream.println("Test");
+			}
+        });
     }
 
     public int GetLevel () {
@@ -274,4 +284,14 @@ public class Player {
     public int GetSkillLevelBlood () {
         return nSkillLevelBlood;
     }
+
+	public Timer getTimer() {
+		return m_timer;
+	}
+
+	public void setTimer(Timer m_timer) {
+		this.m_timer = m_timer;
+	}
+
+
 }

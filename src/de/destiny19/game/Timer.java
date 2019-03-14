@@ -36,7 +36,9 @@ public abstract class Timer {
 	
 	public void perform() {
 		if ( isActive() ) {
-			doAction();
+			if (step == 0) {
+				doAction();
+			}
 			step++;
 			
 			//reset if the task duration is reached

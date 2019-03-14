@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
+import de.destiny19.player.Player;
+
 public class Game implements Runnable {
 	public static PrintStream devstream;
+	static Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	
 	public static enum GAMECONFIG {
 		FPS(60);
@@ -35,7 +38,6 @@ public class Game implements Runnable {
 	@Override
 	public void run() {
 		//initialize the frame
-		mainframe.setVisible(true);
 		while (isRunning()) {
 			processInput();
 			updateGameState();
@@ -55,15 +57,22 @@ public class Game implements Runnable {
 	
 	public synchronized void start() {
 		mainframe = new Frame(GAMESTATE.TITLE);
+		mainframe.setVisible(true);
 		devstream.println("Starting game loop");
 		gThread = new Thread(this);
 		gThread.start();
 		setRunning(true);
+		
+		//test
+		player.getTimer().setTaskDuration(50);
+		player.getTimer().init();
 	}
 	
 	public synchronized void stop() throws InterruptedException {
 		if (isRunning()) {
 			setRunning(false); //thread will stop auto, because it exits loop
+			//test
+			player.getTimer().destroy();
 			devstream.println("Game loop stopped");
 		}
 	}
@@ -94,7 +103,7 @@ public class Game implements Runnable {
 	}
 
 	public void updateGameState() {
-		
+		player.getTimer().perform();
 	}
 
 	public void render() {
