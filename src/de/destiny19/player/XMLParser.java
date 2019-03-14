@@ -59,72 +59,72 @@ public class XMLParser {
  
             // level element
             Element level = document.createElement("level");
-            level.appendChild(document.createTextNode(Integer.toString(pl.getLevel())));
+            level.appendChild(document.createTextNode(Integer.toString(pl.GetLevel())));
             player.appendChild(level);
  
             // statPoints element
             Element statPoints = document.createElement("statPoints");
-            statPoints.appendChild(document.createTextNode(Integer.toString(pl.getStatPoints())));
+            statPoints.appendChild(document.createTextNode(Integer.toString(pl.GetStatPoints())));
             player.appendChild(statPoints);
  
             // skillPoints element
             Element skillPoints = document.createElement("skillPoints");
-            skillPoints.appendChild(document.createTextNode(Integer.toString(pl.getSkillPoints())));
+            skillPoints.appendChild(document.createTextNode(Integer.toString(pl.GetSkillPoints())));
             player.appendChild(skillPoints);
  
             // HP elements
             Element HP = document.createElement("HP");
-            HP.appendChild(document.createTextNode(Integer.toString(pl.getHP())));
+            HP.appendChild(document.createTextNode(Integer.toString(pl.GetHP())));
             player.appendChild(HP);
             
             // aktHP elements
             Element aktHP = document.createElement("aktHP");
-            aktHP.appendChild(document.createTextNode(Integer.toString(pl.getAktHP())));
+            aktHP.appendChild(document.createTextNode(Integer.toString(pl.GetAktHP())));
             player.appendChild(aktHP);
             
             // MP elements
             Element MP = document.createElement("MP");
-            MP.appendChild(document.createTextNode(Integer.toString(pl.getMP())));
+            MP.appendChild(document.createTextNode(Integer.toString(pl.GetMP())));
             player.appendChild(MP);
             
             // aktMP elements
             Element aktMP = document.createElement("aktMP");
-            aktMP.appendChild(document.createTextNode(Integer.toString(pl.getAktMP())));
+            aktMP.appendChild(document.createTextNode(Integer.toString(pl.GetAktMP())));
             player.appendChild(aktMP);
             
             // strength elements
             Element strength = document.createElement("strength");
-            strength.appendChild(document.createTextNode(Integer.toString(pl.getStrength())));
+            strength.appendChild(document.createTextNode(Integer.toString(pl.GetStrength())));
             player.appendChild(strength);
             
             // defence elements
             Element defence = document.createElement("defence");
-            defence.appendChild(document.createTextNode(Integer.toString(pl.getDefence())));
+            defence.appendChild(document.createTextNode(Integer.toString(pl.GetDefence())));
             player.appendChild(defence);
             
             // intelligence elements
             Element intelligence = document.createElement("intelligence");
-            intelligence.appendChild(document.createTextNode(Integer.toString(pl.getIntelligence())));
+            intelligence.appendChild(document.createTextNode(Integer.toString(pl.GetIntelligence())));
             player.appendChild(intelligence);
             
             // skillFire elements
             Element skillFire = document.createElement("skillFire");
-            skillFire.appendChild(document.createTextNode(Integer.toString(pl.getSkillLevelFire())));
+            skillFire.appendChild(document.createTextNode(Integer.toString(pl.GetSkillLevelFire())));
             player.appendChild(skillFire);
             
             // skillIce elements
             Element skillIce = document.createElement("skillIce");
-            skillIce.appendChild(document.createTextNode(Integer.toString(pl.getSkillLevelIce())));
+            skillIce.appendChild(document.createTextNode(Integer.toString(pl.GetSkillLevelIce())));
             player.appendChild(skillIce);
             
             // skillEarth elements
             Element skillEarth = document.createElement("skillEarth");
-            skillEarth.appendChild(document.createTextNode(Integer.toString(pl.getSKillLevelEarth())));
+            skillEarth.appendChild(document.createTextNode(Integer.toString(pl.GetSKillLevelEarth())));
             player.appendChild(skillEarth);
             
             // skillBlood elements
             Element skillBlood = document.createElement("skillBlood");
-            skillBlood.appendChild(document.createTextNode(Integer.toString(pl.getSkillLevelBlood())));
+            skillBlood.appendChild(document.createTextNode(Integer.toString(pl.GetSkillLevelBlood())));
             player.appendChild(skillBlood);
             
             //----------------------------------------------------

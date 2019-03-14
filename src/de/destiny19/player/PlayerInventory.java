@@ -16,7 +16,7 @@ public class PlayerInventory {
     private int nLightEssence;
     private int nPinkFluffyUnicornHorn;
 
-    PlayerInventory(int _nGold, int _nWood, int _nStone, int _nCopper, int _nIron, int _nSteel, int _nObsidian, int _nEntHearth, int _nDeamonSoul, int _nFlameEssence, int _nIceEssence, int _nDarkEssence, int _nLightEssence, int _nPinkFluffyUnicornHorn) {
+    public PlayerInventory(int _nGold, int _nWood, int _nStone, int _nCopper, int _nIron, int _nSteel, int _nObsidian, int _nEntHearth, int _nDeamonSoul, int _nFlameEssence, int _nIceEssence, int _nDarkEssence, int _nLightEssence, int _nPinkFluffyUnicornHorn) {
         nGold = _nGold;
         nWood = _nWood;
         nStone = _nStone;
