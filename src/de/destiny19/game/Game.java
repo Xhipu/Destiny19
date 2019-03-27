@@ -8,7 +8,7 @@ import de.destiny19.player.Player;
 
 public class Game implements Runnable {
 	public static PrintStream devstream;
-	static Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	static Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	
 	public static enum GAMECONFIG {
 		FPS(60);

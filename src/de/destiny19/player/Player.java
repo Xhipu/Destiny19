@@ -47,11 +47,11 @@ public class Player {
         });
     }
 
-    public int GetLevel () {
+    public int getLevel () {
         return nLevel;
     }
 
-    public void LevelUp (int _nLevel) {
+    public void levelUp (int _nLevel) {
         nLevel += _nLevel;
         nHP += _nLevel;
         nMP += _nLevel;
@@ -61,63 +61,63 @@ public class Player {
         nEP *= 2;
     }
 
-    public int GetEP () {
+    public int getEP () {
         return nEP;
     }
 
-    public int GetnAktEP () {
+    public int getAktEP () {
         return nAktEP;
     }
 
-    public void AddEP (int _nEP) {
+    public void addEP (int _nEP) {
         if((nAktEP + _nEP) >= nEP){
-            LevelUp(1);
+            levelUp(1);
         }else {
             nAktEP += _nEP;
         }
     }
 
-    public void AddStatPoints (int _nStatPoints) {
+    public void addStatPoints (int _nStatPoints) {
         nStatPoints += _nStatPoints;
     }
 
-    public void RemoveStatPoits (int _nStatPoints) {
+    public void removeStatPoits (int _nStatPoints) {
         nStatPoints -= _nStatPoints;
     }
 
-    public int GetStatPoints () {
+    public int getStatPoints () {
         return nStatPoints;
     }
 
-    public void AddSkillPoints (int _nSkillPoints) {
+    public void addSkillPoints (int _nSkillPoints) {
         nSkillPoints += _nSkillPoints;
     }
 
-    public void RemoveSkillPoints (int _nSkillPoints) {
+    public void removeSkillPoints (int _nSkillPoints) {
         nSkillPoints -= _nSkillPoints;
     }
 
-    public int GetSkillPoints () {
+    public int getSkillPoints () {
         return nSkillPoints;
     }
 
-    public void AddHP (int _nHP) {
+    public void addHP (int _nHP) {
         nHP += _nHP;
     }
 
-    public int GetHP () {
+    public int getHP () {
         return nHP;
     }
     
-    public void SetAktHP () {
+    public void setAktHP () {
         nAktHP = nHP;
     }
     
-    public int GetAktHP () {
+    public int getAktHP () {
     	return nAktHP;
     }
 
-    public void GetHeal (int _nHeal) {
+    public void getHeal (int _nHeal) {
         if((nAktHP += _nHeal) >= nHP) {
             nAktHP = nHP;
         } else {
@@ -126,7 +126,7 @@ public class Player {
         
     }
 
-    public boolean GetDamage (int _nDamage) {
+    public boolean getDamage (int _nDamage) {
         if((nAktHP -= _nDamage) <= 0) {
             nAktHP = 0;
             return false;
@@ -136,19 +136,19 @@ public class Player {
         }
     }
 
-    public void AddMP (int _nMP) {
+    public void addMP (int _nMP) {
         nMP += _nMP;
     }
 
-    public void SetAktMP () {
+    public void setAktMP () {
         nAktMP = nMP;
     }
     
-    public int GetAktMP () {
+    public int getAktMP () {
     	return nAktMP;
     }
 
-    public void GetMana (int _nMP) {
+    public void getMana (int _nMP) {
         if((nAktMP + _nMP) >= nMP) {
             nAktMP = nMP;
         } else {
@@ -156,7 +156,7 @@ public class Player {
         }
     }
 
-    public boolean UseMana (int _nMP) {
+    public boolean useMana (int _nMP) {
         if(nAktMP < _nMP) {
             return false;
         } else {
@@ -165,11 +165,11 @@ public class Player {
         }
     }
 
-    public int GetMP () {
+    public int getMP () {
         return nMP;
     }
 
-    public boolean SkillUpStrength () {
+    public boolean skillUpStrength () {
         if (nStatPoints >= 1) {
             nStrength++;
             nStatPoints--;
@@ -179,15 +179,15 @@ public class Player {
         }
     }
 
-    public void BoostStrength (int _nStrength) {
+    public void boostStrength (int _nStrength) {
         nStrength += _nStrength;
     }
 
-    public int GetStrength () {
+    public int getStrength () {
         return nStrength;
     }
 
-    public boolean SkillUpDefence () {
+    public boolean skillUpDefense () {
         if(nStatPoints >= 1) {
             nDefence++;
             nStatPoints--;
@@ -197,15 +197,15 @@ public class Player {
         }
     }
 
-    public void BoostDefence (int _nDefence) {
+    public void boostDefense (int _nDefence) {
         nDefence += _nDefence;
     }
 
-    public int GetDefence () {
+    public int getDefense () {
         return nDefence;
     }
 
-    public boolean SkillUpIntelligence () {
+    public boolean skillUpIntelligence () {
         if(nStatPoints >= 1) {
             nIntelligence ++;
             nStatPoints--;
@@ -215,15 +215,15 @@ public class Player {
         }
     }
 
-    public void BoostIntelligence (int _nIntelligence) {
+    public void boostIntelligence (int _nIntelligence) {
         nIntelligence += _nIntelligence;
     }
 
-    public int GetIntelligence () {
+    public int getIntelligence () {
         return nIntelligence;
     }
 
-    public boolean IncreaseSkillLevelFire () {
+    public boolean increaseSkillLevelFire () {
         if(nSkillPoints >= 1){
             nSkillLevelFire ++;
             nSkillPoints --;
@@ -233,15 +233,15 @@ public class Player {
         }
     }
 
-    public void BoostSkillLevelFire (int _nSkillLevelFire) {
+    public void boostSkillLevelFire (int _nSkillLevelFire) {
         nSkillLevelFire += _nSkillLevelFire;
     }
 
-    public int GetSkillLevelFire () {
+    public int getSkillLevelFire () {
         return nSkillLevelFire;
     }
 
-    public boolean IncreaseSkillLevelIce () {
+    public boolean increaseSkillLevelIce () {
         if(nSkillPoints >= 1) {
             nSkillLevelIce++;
             nSkillPoints--;
@@ -251,15 +251,15 @@ public class Player {
         }
     }
 
-    public void BoostSkillLevelIce (int _nSkillLevelIce) {
+    public void boostSkillLevelIce (int _nSkillLevelIce) {
         nSkillLevelIce += _nSkillLevelIce;
     }
 
-    public int GetSkillLevelIce () {
+    public int getSkillLevelIce () {
         return nSkillLevelIce;
     }
 
-    public boolean IncreaseSkillLevelEarth () {
+    public boolean increaseSkillLevelEarth () {
         if(nSkillPoints >= 1) {
             nSkillLevelEarth++;
             nSkillPoints--;
@@ -269,19 +269,19 @@ public class Player {
         }
     }
 
-    public void BoostSkillLevelEarth (int _nSkillLevelEarth) {
+    public void boostSkillLevelEarth (int _nSkillLevelEarth) {
         nSkillLevelEarth += _nSkillLevelEarth;
     }
 
-    public int GetSKillLevelEarth () {
+    public int getSKillLevelEarth () {
         return nSkillLevelEarth;
     }
 
-    public void AddSkillLevelBlood (int _nSkillLevelBlood) {
+    public void addSkillLevelBlood (int _nSkillLevelBlood) {
         nSkillLevelBlood += _nSkillLevelBlood;
     }
 
-    public int GetSkillLevelBlood () {
+    public int getSkillLevelBlood () {
         return nSkillLevelBlood;
     }
 

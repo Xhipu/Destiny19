@@ -1,10 +1,16 @@
 package de.destiny19.scenes;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
+
+import com.sun.glass.events.KeyEvent;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Game;
@@ -18,10 +24,19 @@ public class GameScene extends JPanel {
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
 	private UILog pnLog;
 	
+	@SuppressWarnings("serial")
 	public GameScene(Frame parent) {
 		setSize(parent.getSize());
 		setBackground(Color.BLACK);
 		setLayout(null);
+		
+		Action actClose = new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				parent.setScene(Game.GAMESTATE.PAUSE);
+			}
+			
+		};
 		
 		pnEnemy = new UIStaticPanel(50, 50, 350, 350); //+200
 		pnEnemyStats = new UIStaticPanel(50, 450, 350, 250);
@@ -37,6 +52,9 @@ public class GameScene extends JPanel {
 				parent.setScene(Game.GAMESTATE.PAUSE);
 			}
 		});
+		
+		bnPause.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"), "pause");
+		bnPause.getActionMap().put("pause", actClose);
 		
 		add(bnPause);
 		add(pnEnemy);
