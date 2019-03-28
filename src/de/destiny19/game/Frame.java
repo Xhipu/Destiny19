@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import de.destiny19.game.Game.GAMESTATE;
+import de.destiny19.game.Main.GAMESTATE;
 import de.destiny19.scenes.GameScene;
 import de.destiny19.scenes.PauseScene;
 import de.destiny19.scenes.TitleScene;
@@ -15,14 +15,15 @@ import java.awt.CardLayout;
 public class Frame extends JFrame {
 	
 	private static final long serialVersionUID = 4774938382079844594L;
-	private TitleScene title; 	
-	private GameScene game;
-	private PauseScene pause;
+	public TitleScene title; 	
+	public GameScene game;
+	public PauseScene pause;
+	public int mode;
 
 	/**
 	 * Create the frame.
 	 */
-	public Frame(Game.GAMESTATE state) {
+	public Frame(Main.GAMESTATE state) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1200, 800);
@@ -31,7 +32,7 @@ public class Frame extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			Game.devstream.println("Could not set LnF - "+e.getLocalizedMessage());
+			Main.devstream.println("Could not set LnF - "+e.getLocalizedMessage());
 		}
 		
 		//frame is now set, so load game scenes
@@ -49,20 +50,23 @@ public class Frame extends JFrame {
 		//TitleScene extends Canvas
 	}
 	
-	public void setScene(Game.GAMESTATE state) {
+	public void setScene(Main.GAMESTATE state) {
 		CardLayout cl = (CardLayout)(getContentPane().getLayout());
 		switch(state) {
 		case TITLE:
+			mode = 0;
 			cl.show(getContentPane(), "title");
-			Game.devstream.println("Scene - Title");
+			Main.devstream.println("Scene - Title");
 			break;
 		case GAME:
+			mode = 1;
 			cl.show(getContentPane(), "game");
-			Game.devstream.println("Scene - Game");
+			Main.devstream.println("Scene - Game");
 			break;
 		case PAUSE:
+			mode = 2;
 			cl.show(getContentPane(), "pause");
-			Game.devstream.println("Scene - Pause");
+			Main.devstream.println("Scene - Pause");
 			break;
 		}
 		

@@ -1,6 +1,6 @@
 package de.destiny19.player;
 
-import de.destiny19.game.Game;
+import de.destiny19.game.Main;
 import de.destiny19.game.Timer;
 
 public class Player {
@@ -42,7 +42,7 @@ public class Player {
         setTimer(new Timer() {
 			@Override
 			public void doAction() {
-				Game.devstream.println("Test");
+				Main.devstream.println("Test");
 			}
         });
     }

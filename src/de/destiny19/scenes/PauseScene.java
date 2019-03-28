@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
-import de.destiny19.game.Game;
+import de.destiny19.game.Main;
 import de.destiny19.ui.UIButton;
 
 public class PauseScene extends JPanel {
@@ -33,14 +33,14 @@ public class PauseScene extends JPanel {
 		bnresume.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				parent.setScene(Game.GAMESTATE.GAME);
+				parent.setScene(Main.GAMESTATE.GAME);
 			}
 		});
 		
 		bnquit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				parent.dispose();
+				System.exit(0);
 			}
 		});
 		

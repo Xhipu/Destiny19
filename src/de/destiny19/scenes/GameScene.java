@@ -10,10 +10,9 @@ import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import com.sun.glass.events.KeyEvent;
-
 import de.destiny19.game.Frame;
-import de.destiny19.game.Game;
+import de.destiny19.game.Main;
+import de.destiny19.player.Player;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
 import de.destiny19.ui.UIStaticPanel;
@@ -23,6 +22,7 @@ public class GameScene extends JPanel {
 	private UIButton bnPause;
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
 	private UILog pnLog;
+	private Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	
 	@SuppressWarnings("serial")
 	public GameScene(Frame parent) {
@@ -33,7 +33,7 @@ public class GameScene extends JPanel {
 		Action actClose = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				parent.setScene(Game.GAMESTATE.PAUSE);
+				parent.setScene(Main.GAMESTATE.PAUSE);
 			}
 			
 		};
@@ -49,7 +49,7 @@ public class GameScene extends JPanel {
 		bnPause.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				parent.setScene(Game.GAMESTATE.PAUSE);
+				parent.setScene(Main.GAMESTATE.PAUSE);
 			}
 		});
 		
@@ -63,6 +63,9 @@ public class GameScene extends JPanel {
 		add(pnPlayerStats);
 		add(pnSkills);
 		add(pnLog);
+		
+		player.getTimer().setTaskDuration(50);
+		player.getTimer().init();
 	}
 	
 	public void processInput() {
@@ -70,11 +73,16 @@ public class GameScene extends JPanel {
 	}
 	
 	public void updateGameState() {
-		
+		//player.getTimer().destroy();
+		player.getTimer().perform();
 	}
 
 	public void render() {
 		repaint();
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	
