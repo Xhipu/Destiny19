@@ -1,0 +1,30 @@
+<project name="Destiny19">
+	<property name="_src" value="./src"/>
+	<property name="_out" value="./bin"/>
+	<property name="comp" value="${_out}/temp"/>
+	<property name="dist" value="${_out}/Destiny19"/>
+	<!-- Main class -->
+	<property name="main" value="de.destiny19.game.Main"/>
+
+	<target name="clean">
+		<delete dir="${_out}"/>
+	</target>
+
+	<target name="build">
+		<mkdir dir="${comp}"/>
+		<javac srcdir="${_src}" destdir="${comp}"/>
+	</target>
+
+	<target name="deploy" depends="build">
+		<mkdir dir="${dist}"/>
+		<jar destfile="${dist}/${ant.project.name}.jar"
+			  basedir="${comp}">
+			  <manifest>
+				  <attribute name="Main-Class" value="${main}"/>
+			  </manifest>
+		</jar>
+	</target>
+
+	<target name="rebuild" depends="clean,build"/>
+	<target name="redeploy" depends="clean,deploy"/>
+</project>
