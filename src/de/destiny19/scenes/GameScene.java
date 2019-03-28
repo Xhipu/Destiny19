@@ -5,9 +5,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import de.destiny19.game.Frame;
-import de.destiny19.game.Game;
+import de.destiny19.game.Main;
+import de.destiny19.player.Player;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
 import de.destiny19.ui.UIStaticPanel;
@@ -29,6 +31,15 @@ public class GameScene extends JPanel {
 		setBackground(Color.BLACK);
 		setLayout(null);
 		
+
+		Action actClose = new AbstractAction() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				parent.setScene(Main.GAMESTATE.PAUSE);
+			}
+			
+		};
+    
 		pnEnemy = new UIStaticPanel(50, 50, 350, 350); //+200
 		pnEnemyStats = new UIStaticPanel(50, 450, 350, 250);
 		pnPlayer = new UIStaticPanel(600, 50, 350, 350);
@@ -40,7 +51,7 @@ public class GameScene extends JPanel {
 		bnPause.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				parent.setScene(Game.GAMESTATE.PAUSE);
+				parent.setScene(Main.GAMESTATE.PAUSE);
 			}
 		});
 		
@@ -51,9 +62,7 @@ public class GameScene extends JPanel {
 		add(pnPlayerStats);
 		add(pnSkills);
 		add(pnLog);
-
-		//test
-
+    
 		player.getTimer().setTaskDuration(50);
 		player.getTimer().init();
 	}
@@ -63,12 +72,16 @@ public class GameScene extends JPanel {
 	}
 	
 	public void updateGameState() {
+		//player.getTimer().destroy();
 		player.getTimer().perform();
-
 	}
 
 	public void render() {
 		repaint();
+	}
+	
+	public Player getPlayer() {
+		return player;
 	}
 
 	public void save() {

@@ -8,9 +8,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
-import de.destiny19.game.Game;
 import de.destiny19.game.Timer;
 import de.destiny19.player.XMLParser;
+import de.destiny19.game.Main;
 import de.destiny19.ui.UIButton;
 import de.destiny19.scenes.GameScene;
 import de.destiny19.player.Player;
@@ -46,7 +46,7 @@ public class TitleScene extends JPanel {
 			public void mouseClicked(MouseEvent me) {
 				Frame.game.player  	= new Player(1, 0, 0, 100, 0,500, 500, 100 , 100, 5, 5, 5, 1, 1, 1, 1);
 				Frame.game.inv		= new PlayerInventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				parent.setScene(Game.GAMESTATE.GAME);
+				parent.setScene(Main.GAMESTATE.GAME);
 			}
 		});
 
