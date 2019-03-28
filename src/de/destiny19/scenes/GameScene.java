@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Main;
+import de.destiny19.game.Timer;
 import de.destiny19.player.Player;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
@@ -22,7 +23,7 @@ public class GameScene extends JPanel {
 	private static final long serialVersionUID = 7486454402469771687L;
 	private UIButton bnPause;
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
-	private UILog pnLog;
+	public UILog console;
 
 	public Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	public PlayerInventory inv;
@@ -47,7 +48,7 @@ public class GameScene extends JPanel {
 		pnPlayer = new UIStaticPanel(600, 50, 350, 350);
 		pnPlayerStats = new UIStaticPanel(600, 450, 350, 250);
 		pnSkills = new UIStaticPanel(450, 50, 100, 650);
-		pnLog = new UILog(950, 565, getWidth()-955, getHeight()-600);
+		console = new UILog(950, 565, getWidth()-955, getHeight()-600);
 		
 		bnPause = new UIButton("II", getWidth()-65, 0, 60, 60);
 		bnPause.addMouseListener(new MouseAdapter() {
@@ -63,7 +64,7 @@ public class GameScene extends JPanel {
 		add(pnPlayer);
 		add(pnPlayerStats);
 		add(pnSkills);
-		add(pnLog);
+		add(console);
 	}
 	
 	public void processInput() {
@@ -89,8 +90,8 @@ public class GameScene extends JPanel {
 			xml.savePlayer();
 			xml.saveInventory();
 		}catch (Exception e) {
-			System.out.println("Save failed");
-			System.out.println(e);
+			Main.devstream.println("Save failed");
+			Main.devstream.println(e);
 
 		}
 

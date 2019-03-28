@@ -3,10 +3,8 @@ package de.destiny19.game;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.Random;
-
-import de.destiny19.logic.Spawner;
 import de.destiny19.player.Player;
+import de.destiny19.ui.UILog;
 
 public class Main implements Runnable {
 	public static PrintStream devstream;
@@ -148,5 +146,9 @@ public class Main implements Runnable {
 		Player plRet;
 		plRet = mainframe.game.getPlayer();
 		return plRet;
+	}
+
+	public static UILog getGameConsole(){
+		return mainframe.game.console;
 	}
 }
