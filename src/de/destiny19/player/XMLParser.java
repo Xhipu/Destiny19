@@ -8,8 +8,7 @@ import javax.xml.bind.*;
 import javax.xml.namespace.QName;
 import javax.xml.bind.annotation.*;
 
-import de.destiny19.game.Frame;
-import de.destiny19.game.Timer;
+import de.destiny19.game.Main;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -32,7 +31,7 @@ public class XMLParser {
             OutputStream os = new FileOutputStream( "Player.xml" );
 
             ObjectFactory objectFactory = new ObjectFactory();
-            JAXBElement<Player> je =  objectFactory.createPlayer(Frame.game.player);
+            JAXBElement<Player> je =  objectFactory.createPlayer(Main.mainframe.game.player);
             marshaller.marshal(je, os);
 
 
@@ -71,7 +70,7 @@ public class XMLParser {
             OutputStream os = new FileOutputStream( "PlayerInventory.xml" );
 
             ObjectFactory objectFactory = new ObjectFactory();
-            JAXBElement<PlayerInventory> je =  objectFactory.createPlayerInventory(Frame.game.inv);
+            JAXBElement<PlayerInventory> je =  objectFactory.createPlayerInventory(Main.mainframe.game.inv);
             marshaller.marshal(je, os);
 
             System.out.println("PlayerInventory save successfully");

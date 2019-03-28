@@ -1,11 +1,13 @@
 package de.destiny19.scenes;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Main;
@@ -13,7 +15,6 @@ import de.destiny19.player.Player;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
 import de.destiny19.ui.UIStaticPanel;
-import de.destiny19.player.Player;
 import de.destiny19.player.PlayerInventory;
 import de.destiny19.player.XMLParser;
 
@@ -32,6 +33,7 @@ public class GameScene extends JPanel {
 		setLayout(null);
 		
 
+		@SuppressWarnings({ "serial", "unused" })
 		Action actClose = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -62,9 +64,6 @@ public class GameScene extends JPanel {
 		add(pnPlayerStats);
 		add(pnSkills);
 		add(pnLog);
-    
-		player.getTimer().setTaskDuration(50);
-		player.getTimer().init();
 	}
 	
 	public void processInput() {

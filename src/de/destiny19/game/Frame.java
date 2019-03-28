@@ -80,7 +80,5 @@ public class Frame extends JFrame {
 	}
 
 	public void update(){
-	    if(nMode == 1)
-	        game.updateGameState();
     }
 }

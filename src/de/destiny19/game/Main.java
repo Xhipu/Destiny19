@@ -32,7 +32,7 @@ public class Main implements Runnable {
 	
 	private Thread gThread;
 	private boolean running = false;
-	private static Frame mainframe;
+	public static Frame mainframe;
 	
 	@Override
 	public void run() {

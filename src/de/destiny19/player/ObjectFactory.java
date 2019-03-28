@@ -4,7 +4,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 
-import de.destiny19.game.Frame;
+import de.destiny19.game.Main;
 import de.destiny19.player.Player;
 import de.destiny19.player.PlayerInventory;
 import de.destiny19.game.Timer;
@@ -21,11 +21,11 @@ public class ObjectFactory {
     }
 
     public Player createPlayer () {
-        return Frame.game.player;
+        return Main.GetPlayer();
     }
 
     public PlayerInventory createInventory () {
-        return Frame.game.inv;
+        return Main.mainframe.game.inv;    		
     }
 
     @XmlElementDecl(namespace = "", name = "Player")

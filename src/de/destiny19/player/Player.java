@@ -65,12 +65,6 @@ public class Player {
         nSkillLevelIce = _nSkillLevelIce;
         nSkillLevelEarth = _nSkillLevelEarth;
         nSkillLevelBlood = _nSkillLevelBlood;
-        setTimer(new Timer() {
-			@Override
-			public void doAction() {
-				Main.devstream.println("Test");
-			}
-        });
     }
 
     public int GetLevel () {
@@ -318,6 +312,16 @@ public class Player {
 	public void setTimer(Timer m_timer) {
 		this.m_timer = m_timer;
 	}
-
+	
+	public void initTimer() {
+		setTimer(new Timer() {
+			@Override
+			public void doAction() {
+				Main.devstream.println("Test");
+			}
+        });
+        getTimer().setTaskDuration(30);
+        getTimer().init();
+	}
 
 }
