@@ -3,11 +3,14 @@ package de.destiny19.game;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Random;
 
+import de.destiny19.logic.Spawner;
 import de.destiny19.player.Player;
 
 public class Main implements Runnable {
 	public static PrintStream devstream;
+
 	
 	public static enum GAMECONFIG {
 		FPS(60);
@@ -109,7 +112,6 @@ public class Main implements Runnable {
 			default:
 				break;
 		}
-		
 	}
 
 	public void render() {
