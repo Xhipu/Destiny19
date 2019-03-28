@@ -1,244 +1,114 @@
 package de.destiny19.player;
 
 import java.io.File;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
 
+import javax.xml.bind.*;
+import javax.xml.namespace.QName;
+import javax.xml.bind.annotation.*;
+
+import de.destiny19.game.Frame;
+import de.destiny19.game.Timer;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.FileNotFoundException;
 
-public class XMLParser {
-	
-	private static Player pl;
-	private static PlayerInventory inv;
-	
-    public static String xmlFilePath = "Player.xml";
- 
-    public XMLParser (Player _pl, PlayerInventory _inv, String filePath) {
-    	pl = _pl;
-    	inv = _inv;
-    	xmlFilePath = filePath;
-    	
-    	safePlayer();
-    }
- 
-    private static void safePlayer () {
-    	
-        try {
- 
-            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
- 
-            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
- 
-            Document document = documentBuilder.newDocument();
 
-            // root element
-            Element root = document.createElement("Destiny19");
-            document.appendChild(root);
- 
-            // player element
-            Element player = document.createElement("Player");
-            root.appendChild(player);
- 
-            // set an attribute to staff element
-            Attr attr = document.createAttribute("id");
-            attr.setValue("1");
-            player.setAttributeNode(attr);
- 
-            // level element
-            Element level = document.createElement("level");
-            level.appendChild(document.createTextNode(Integer.toString(pl.getLevel())));
-            player.appendChild(level);
- 
-            // statPoints element
-            Element statPoints = document.createElement("statPoints");
-            statPoints.appendChild(document.createTextNode(Integer.toString(pl.getStatPoints())));
-            player.appendChild(statPoints);
- 
-            // skillPoints element
-            Element skillPoints = document.createElement("skillPoints");
-            skillPoints.appendChild(document.createTextNode(Integer.toString(pl.getSkillPoints())));
-            player.appendChild(skillPoints);
- 
-            // HP elements
-            Element HP = document.createElement("HP");
-            HP.appendChild(document.createTextNode(Integer.toString(pl.getHP())));
-            player.appendChild(HP);
-            
-            // aktHP elements
-            Element aktHP = document.createElement("aktHP");
-            aktHP.appendChild(document.createTextNode(Integer.toString(pl.getAktHP())));
-            player.appendChild(aktHP);
-            
-            // MP elements
-            Element MP = document.createElement("MP");
-            MP.appendChild(document.createTextNode(Integer.toString(pl.getMP())));
-            player.appendChild(MP);
-            
-            // aktMP elements
-            Element aktMP = document.createElement("aktMP");
-            aktMP.appendChild(document.createTextNode(Integer.toString(pl.getAktMP())));
-            player.appendChild(aktMP);
-            
-            // strength elements
-            Element strength = document.createElement("strength");
-            strength.appendChild(document.createTextNode(Integer.toString(pl.getStrength())));
-            player.appendChild(strength);
-            
-            // defence elements
-            Element defence = document.createElement("defence");
-            defence.appendChild(document.createTextNode(Integer.toString(pl.getDefense())));
-            player.appendChild(defence);
-            
-            // intelligence elements
-            Element intelligence = document.createElement("intelligence");
-            intelligence.appendChild(document.createTextNode(Integer.toString(pl.getIntelligence())));
-            player.appendChild(intelligence);
-            
-            // skillFire elements
-            Element skillFire = document.createElement("skillFire");
-            skillFire.appendChild(document.createTextNode(Integer.toString(pl.getSkillLevelFire())));
-            player.appendChild(skillFire);
-            
-            // skillIce elements
-            Element skillIce = document.createElement("skillIce");
-            skillIce.appendChild(document.createTextNode(Integer.toString(pl.getSkillLevelIce())));
-            player.appendChild(skillIce);
-            
-            // skillEarth elements
-            Element skillEarth = document.createElement("skillEarth");
-            skillEarth.appendChild(document.createTextNode(Integer.toString(pl.getSKillLevelEarth())));
-            player.appendChild(skillEarth);
-            
-            // skillBlood elements
-            Element skillBlood = document.createElement("skillBlood");
-            skillBlood.appendChild(document.createTextNode(Integer.toString(pl.getSkillLevelBlood())));
-            player.appendChild(skillBlood);
-            
-            //----------------------------------------------------
-     
-            
-            // inventory element
-            Element inventory = document.createElement("Inventory");
-            root.appendChild(inventory);
-            
-            // nGold elements
-            Element gold = document.createElement("Gold");
-            gold.appendChild(document.createTextNode(Integer.toString(inv.getGold())));
-            inventory.appendChild(gold);
-            
-            // nWood elements
-            Element wood = document.createElement("wood");
-            wood.appendChild(document.createTextNode(Integer.toString(inv.getWood())));
-            inventory.appendChild(wood);
-            
-            // nStone elements
-            Element stone = document.createElement("stone");
-            stone.appendChild(document.createTextNode(Integer.toString(inv.getStone())));
-            inventory.appendChild(stone);
-            
-            // nCopper elements
-            Element copper = document.createElement("copper");
-            copper.appendChild(document.createTextNode(Integer.toString(inv.getCopper())));
-            inventory.appendChild(copper);
-            
-            // nIron elements
-            Element iron = document.createElement("iron");
-            iron.appendChild(document.createTextNode(Integer.toString(inv.getIron())));
-            inventory.appendChild(iron);
-            
-            // nSteel elements
-            Element steel = document.createElement("steel");
-            steel.appendChild(document.createTextNode(Integer.toString(inv.getSteel())));
-            inventory.appendChild(steel);
-            
-            // nObsidian elements
-            Element obsidian = document.createElement("obsidian");
-            obsidian.appendChild(document.createTextNode(Integer.toString(inv.getObsidian())));
-            inventory.appendChild(obsidian);
-            
-            // nEntHearth elements
-            Element entHearth = document.createElement("entHearth");
-            entHearth.appendChild(document.createTextNode(Integer.toString(inv.getEntHearth())));
-            inventory.appendChild(entHearth);
-            
-            // nDeamonSoul elements
-            Element deamonSoul = document.createElement("deamonSoul");
-            deamonSoul.appendChild(document.createTextNode(Integer.toString(inv.getDeamonSoul())));
-            inventory.appendChild(deamonSoul);
-            
-            // nFlameEssence elements
-            Element flameEssence = document.createElement("flameEssence");
-            flameEssence.appendChild(document.createTextNode(Integer.toString(inv.getFlameEssence())));
-            inventory.appendChild(flameEssence);
-            
-            // nIceEssence elements
-            Element iceEssence = document.createElement("iceEssence");
-            iceEssence.appendChild(document.createTextNode(Integer.toString(inv.getIceEssence())));
-            inventory.appendChild(iceEssence);
-            
-            // nDarkEssence elements
-            Element darkEssence = document.createElement("darkEssence");
-            darkEssence.appendChild(document.createTextNode(Integer.toString(inv.getDarkEssence())));
-            inventory.appendChild(darkEssence);
-            
-            // nLightEssence elements
-            Element lightEssence = document.createElement("lightEssence");
-            lightEssence.appendChild(document.createTextNode(Integer.toString(inv.getLightEssence())));
-            inventory.appendChild(lightEssence);
-            
-            // nPinkFluffyUnicornHorn elements
-            Element PinkFluffyUnicornHorn = document.createElement("PinkFluffyUnicornHorn");
-            PinkFluffyUnicornHorn.appendChild(document.createTextNode(Integer.toString(inv.getPinkFluffyUnicornHorn())));
-            inventory.appendChild(PinkFluffyUnicornHorn);
-            
- 
- 
-            // create the xml file
-            //transform the DOM Object to an XML File
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(xmlFilePath));
- 
-            // If you use
-            // StreamResult result = new StreamResult(System.out);
-            // the output will be pushed to the standard output ...
-            // You can use that for debugging 
- 
-            transformer.transform(domSource, streamResult);
- 
-            System.out.println("XMLParser - Player Saved");
- 
-        } catch (ParserConfigurationException pce) {
-            pce.printStackTrace();
-        } catch (TransformerException tfe) {
-            tfe.printStackTrace();
+public class XMLParser {
+    public XMLParser () {
+
+    }
+
+    public void savePlayer () throws JAXBException {
+        JAXBContext jc = JAXBContext.newInstance( Player.class);
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        try{
+            OutputStream os = new FileOutputStream( "Player.xml" );
+
+            ObjectFactory objectFactory = new ObjectFactory();
+            JAXBElement<Player> je =  objectFactory.createPlayer(Frame.game.player);
+            marshaller.marshal(je, os);
+
+
+            System.out.println("Player save successfully");
+        }catch (Exception e) {
+
+            System.out.println("Player save failed");
+            System.out.println(e);
         }
     }
     
-    public void loadPlayer () throws JAXBException, FileNotFoundException {
-    	File file = new File(xmlFilePath);
-    	
-        JAXBContext jaxbContextPl = JAXBContext.newInstance(Player.class);
-        Unmarshaller unmarshallerPl = jaxbContextPl.createUnmarshaller();
-        pl = (Player) unmarshallerPl.unmarshal(file);
-        
-        JAXBContext jaxbContextInv = JAXBContext.newInstance(PlayerInventory.class);
-        Unmarshaller unmarshallerInv = jaxbContextInv.createUnmarshaller();
-        inv = (PlayerInventory) unmarshallerInv.unmarshal(file);
+    public Player loadPlayer () throws JAXBException, FileNotFoundException{
+        try{
+            File file = new File("Player.xml");
+            JAXBContext jContext = JAXBContext.newInstance(Player.class);
+            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
+            Player player = (Player) unmarshallerObj.unmarshal(file);
+
+            player.setTimer(player.getTimer());
+
+            System.out.print("player load successful");
+            return player;
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+        return null;
     }
-	
+
+    public void saveInventory () throws JAXBException {
+        JAXBContext jc = JAXBContext.newInstance( PlayerInventory.class);
+        Marshaller marshaller = jc.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        try{
+            OutputStream os = new FileOutputStream( "PlayerInventory.xml" );
+
+            ObjectFactory objectFactory = new ObjectFactory();
+            JAXBElement<PlayerInventory> je =  objectFactory.createPlayerInventory(Frame.game.inv);
+            marshaller.marshal(je, os);
+
+            System.out.println("PlayerInventory save successfully");
+        }catch (Exception e) {
+
+            System.out.println("PlayerInventory save failed");
+            System.out.println(e);
+        }
+    }
+
+    public PlayerInventory loadInventory () throws JAXBException, FileNotFoundException {
+        try{
+            File file = new File("PlayerInventory.xml");
+            JAXBContext jContext = JAXBContext.newInstance(PlayerInventory.class);
+            Unmarshaller unmarshallerObj = jContext.createUnmarshaller();
+            PlayerInventory inv = (PlayerInventory) unmarshallerObj.unmarshal(file);
+
+
+            System.out.print("playerinventory load successful");
+            return inv;
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+        return null;
+    }
+
+    private final static QName _Player_QNAME = new QName("", "Frame.game.player");
+    @XmlElementDecl(namespace = "", name = "Player")
+    public JAXBElement<Player> createPlayer(Player value) {
+        return new JAXBElement<Player>(_Player_QNAME, Player.class, null, value);
+    }
+
+    private final static QName _PlayerInventory_QNAME = new QName("", "Frame.game.inv");
+    @XmlElementDecl(namespace = "", name = "PlayerInventory")
+    public JAXBElement<PlayerInventory> createPlayer(PlayerInventory value) {
+        return new JAXBElement<PlayerInventory>(_PlayerInventory_QNAME, PlayerInventory.class, null, value);
+    }
 }

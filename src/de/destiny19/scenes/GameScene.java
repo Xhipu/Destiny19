@@ -1,12 +1,9 @@
 package de.destiny19.scenes;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
@@ -16,20 +13,25 @@ import de.destiny19.player.Player;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
 import de.destiny19.ui.UIStaticPanel;
+import de.destiny19.player.Player;
+import de.destiny19.player.PlayerInventory;
+import de.destiny19.player.XMLParser;
 
 public class GameScene extends JPanel {
 	private static final long serialVersionUID = 7486454402469771687L;
 	private UIButton bnPause;
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
 	private UILog pnLog;
-	private Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+	public Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	public PlayerInventory inv;
 	
-	@SuppressWarnings("serial")
 	public GameScene(Frame parent) {
 		setSize(parent.getSize());
 		setBackground(Color.BLACK);
 		setLayout(null);
 		
+
 		Action actClose = new AbstractAction() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -37,7 +39,7 @@ public class GameScene extends JPanel {
 			}
 			
 		};
-		
+    
 		pnEnemy = new UIStaticPanel(50, 50, 350, 350); //+200
 		pnEnemyStats = new UIStaticPanel(50, 450, 350, 250);
 		pnPlayer = new UIStaticPanel(600, 50, 350, 350);
@@ -53,9 +55,6 @@ public class GameScene extends JPanel {
 			}
 		});
 		
-		bnPause.getInputMap().put(KeyStroke.getKeyStroke("ESCAPE"), "pause");
-		bnPause.getActionMap().put("pause", actClose);
-		
 		add(bnPause);
 		add(pnEnemy);
 		add(pnEnemyStats);
@@ -63,7 +62,7 @@ public class GameScene extends JPanel {
 		add(pnPlayerStats);
 		add(pnSkills);
 		add(pnLog);
-		
+    
 		player.getTimer().setTaskDuration(50);
 		player.getTimer().init();
 	}
@@ -85,5 +84,16 @@ public class GameScene extends JPanel {
 		return player;
 	}
 
-	
+	public void save() {
+		XMLParser xml = new XMLParser();
+		try{
+			xml.savePlayer();
+			xml.saveInventory();
+		}catch (Exception e) {
+			System.out.println("Save failed");
+			System.out.println(e);
+
+		}
+
+	}
 }

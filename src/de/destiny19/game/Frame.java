@@ -78,4 +78,9 @@ public class Frame extends JFrame {
 		game.render();
 		pause.render();
 	}
+
+	public void update(){
+	    if(nMode == 1)
+	        game.updateGameState();
+    }
 }

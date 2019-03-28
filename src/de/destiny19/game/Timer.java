@@ -1,5 +1,12 @@
 package de.destiny19.game;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "timer", propOrder = {"active", "m_lnTaskDuration", "step"})
 public abstract class Timer {
 	
 	//timer executes perform() as long as it is alive
@@ -9,9 +16,11 @@ public abstract class Timer {
 	//start the timer with Timer.init()
 	//reset the timer with Timer.reset()
 	//kill the timer with Timer.destroy()
-	
+	@XmlElement(name="active", required = true)
 	private boolean active;
+	@XmlElement(name="m_lnTaskDuration", required = true)
 	private long m_lnTaskDuration;
+	@XmlElement(name="step", required = true)
 	private long step;
 	
 	public abstract void doAction();
