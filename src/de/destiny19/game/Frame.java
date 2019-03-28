@@ -15,9 +15,10 @@ import java.awt.CardLayout;
 public class Frame extends JFrame {
 	
 	private static final long serialVersionUID = 4774938382079844594L;
-	private TitleScene title; 	
-	private GameScene game;
-	private PauseScene pause;
+	public static TitleScene title;
+	public static GameScene game;
+	public static PauseScene pause;
+	public int nMode = 0;
 
 	/**
 	 * Create the frame.
@@ -54,14 +55,17 @@ public class Frame extends JFrame {
 		switch(state) {
 		case TITLE:
 			cl.show(getContentPane(), "title");
+			nMode = 0;
 			Game.devstream.println("Scene - Title");
 			break;
 		case GAME:
 			cl.show(getContentPane(), "game");
+			nMode = 1;
 			Game.devstream.println("Scene - Game");
 			break;
 		case PAUSE:
 			cl.show(getContentPane(), "pause");
+			nMode = 2;
 			Game.devstream.println("Scene - Pause");
 			break;
 		}
@@ -74,4 +78,9 @@ public class Frame extends JFrame {
 		game.render();
 		pause.render();
 	}
+
+	public void update(){
+	    if(nMode == 1)
+	        game.updateGameState();
+    }
 }

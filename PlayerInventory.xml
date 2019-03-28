@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playerinventory>
+    <nGold>0</nGold>
+    <nWood>0</nWood>
+    <nStone>0</nStone>
+    <nCopper>0</nCopper>
+    <nIron>0</nIron>
+    <nSteel>0</nSteel>
+    <nObsidian>0</nObsidian>
+    <nEntHearth>0</nEntHearth>
+    <nDeamonSoul>0</nDeamonSoul>
+    <nFlameEssence>0</nFlameEssence>
+    <nIceEssence>0</nIceEssence>
+    <nDarkEssence>0</nDarkEssence>
+    <nLightEssence>0</nLightEssence>
+    <nPinkFluffyUnicornHorn>0</nPinkFluffyUnicornHorn>
+</playerinventory>

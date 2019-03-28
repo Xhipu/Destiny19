@@ -11,12 +11,18 @@ import de.destiny19.game.Game;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
 import de.destiny19.ui.UIStaticPanel;
+import de.destiny19.player.Player;
+import de.destiny19.player.PlayerInventory;
+import de.destiny19.player.XMLParser;
 
 public class GameScene extends JPanel {
 	private static final long serialVersionUID = 7486454402469771687L;
 	private UIButton bnPause;
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
 	private UILog pnLog;
+
+	public Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	public PlayerInventory inv;
 	
 	public GameScene(Frame parent) {
 		setSize(parent.getSize());
@@ -45,6 +51,11 @@ public class GameScene extends JPanel {
 		add(pnPlayerStats);
 		add(pnSkills);
 		add(pnLog);
+
+		//test
+
+		player.getTimer().setTaskDuration(50);
+		player.getTimer().init();
 	}
 	
 	public void processInput() {
@@ -52,12 +63,24 @@ public class GameScene extends JPanel {
 	}
 	
 	public void updateGameState() {
-		
+		player.getTimer().perform();
+
 	}
 
 	public void render() {
 		repaint();
 	}
 
-	
+	public void save() {
+		XMLParser xml = new XMLParser();
+		try{
+			xml.savePlayer();
+			xml.saveInventory();
+		}catch (Exception e) {
+			System.out.println("Save failed");
+			System.out.println(e);
+
+		}
+
+	}
 }

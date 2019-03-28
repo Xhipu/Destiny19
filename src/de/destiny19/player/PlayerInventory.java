@@ -1,20 +1,43 @@
 package de.destiny19.player;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {"nGold", "nWood", "nStone", "nCopper", "nIron", "nSteel", "nObsidian", "nEntHearth", "nDeamonSoul", "nFlameEssence", "nIceEssence", "nDarkEssence", "nLightEssence", "nPinkFluffyUnicornHorn"})
+@XmlRootElement(name = "playerinventory")
 public class PlayerInventory {
+    @XmlElement(name="nGold", required = true)
     private int nGold;
+    @XmlElement(name="nWood", required = true)
     private int nWood;
+    @XmlElement(name="nStone", required = true)
     private int nStone;
+    @XmlElement(name="nCopper", required = true)
     private int nCopper;
+    @XmlElement(name="nIron", required = true)
     private int nIron;
+    @XmlElement(name="nSteel", required = true)
     private int nSteel;
+    @XmlElement(name="nObsidian", required = true)
     private int nObsidian;
+    @XmlElement(name="nEntHearth", required = true)
     private int nEntHearth;
+    @XmlElement(name="nDeamonSoul", required = true)
     private int nDeamonSoul;
+    @XmlElement(name="nFlameEssence", required = true)
     private int nFlameEssence;
+    @XmlElement(name="nIceEssence", required = true)
     private int nIceEssence;
+    @XmlElement(name="nDarkEssence", required = true)
     private int nDarkEssence;
+    @XmlElement(name="nLightEssence", required = true)
     private int nLightEssence;
+    @XmlElement(name="nPinkFluffyUnicornHorn", required = true)
     private int nPinkFluffyUnicornHorn;
+
+    public PlayerInventory () {
+        //PlayerInventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+    }
 
     public PlayerInventory(int _nGold, int _nWood, int _nStone, int _nCopper, int _nIron, int _nSteel, int _nObsidian, int _nEntHearth, int _nDeamonSoul, int _nFlameEssence, int _nIceEssence, int _nDarkEssence, int _nLightEssence, int _nPinkFluffyUnicornHorn) {
         nGold = _nGold;

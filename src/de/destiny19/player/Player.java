@@ -3,24 +3,50 @@ package de.destiny19.player;
 import de.destiny19.game.Game;
 import de.destiny19.game.Timer;
 
+import javax.xml.bind.annotation.*;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "", propOrder = {"nLevel", "nStatPoints", "nSkillPoints", "nEP", "nAktEP", "nHP", "nAktHP", "nMP", "nAktMP", "nStrength", "nDefence", "nIntelligence", "nSkillLevelFire", "nSkillLevelIce", "nSkillLevelEarth", "nSkillLevelBlood"})
+@XmlRootElement(name = "Player")
 public class Player {
+    @XmlElement(name="nLevel", required = true)
     private int nLevel;
+    @XmlElement(name="nStatPoints", required = true)
     private int nStatPoints;
+    @XmlElement(name="nSkillPoints", required = true)
     private int nSkillPoints;
+    @XmlElement(name="nEp", required = true)
     private int nEP;
+    @XmlElement(name="nAktEP", required = true)
     private int nAktEP;
+    @XmlElement(name="nHP", required = true)
     private int nHP;
+    @XmlElement(name="nAktHP", required = true)
     private int nAktHP;
+    @XmlElement(name="nMP", required = true)
     private int nMP;
+    @XmlElement(name="nnAktMP", required = true)
     private int nAktMP;
+    @XmlElement(name="nStrength", required = true)
     private int nStrength;
+    @XmlElement(name="nDefence", required = true)
     private int nDefence;
+    @XmlElement(name="nIntelligence", required = true)
     private int nIntelligence;
+    @XmlElement(name="nSkillLevelFire", required = true)
     private int nSkillLevelFire;
+    @XmlElement(name="nSkillLevelIce", required = true)
     private int nSkillLevelIce;
+    @XmlElement(name="nSkillLevelEarth", required = true)
     private int nSkillLevelEarth;
+    @XmlElement(name="nSkillLevelBlood", required = true)
     private int nSkillLevelBlood;
+    @XmlTransient
     private Timer m_timer;
+
+    public Player () {
+        //Player(1, 0, 0, 100, 0,500, 500, 100 , 100, 5, 5, 5, 1, 1, 1, 1);
+    }
 
     public Player(int _nLevel, int _nStatPoints, int _nSkillPoints, int _nEP, int _nAktEP, int _nHP,int _nAktHP, int _nMP, int _nAktMP, int _nStrength, int _nDefence, int _nIntelligence, int _nSkillLevelFire, int _nSkillLevelIce, int _nSkillLevelEarth, int _nSkillLevelBlood) {
         nLevel = _nLevel;

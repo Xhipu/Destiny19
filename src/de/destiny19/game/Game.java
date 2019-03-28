@@ -5,11 +5,14 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import de.destiny19.player.Player;
+import de.destiny19.player.PlayerInventory;
+import de.destiny19.scenes.GameScene;
 
 public class Game implements Runnable {
 	public static PrintStream devstream;
-	static Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	
+	//static Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	Player player;
+	PlayerInventory inv;
 	public static enum GAMECONFIG {
 		FPS(60);
 		private int fps;
@@ -62,17 +65,14 @@ public class Game implements Runnable {
 		gThread = new Thread(this);
 		gThread.start();
 		setRunning(true);
-		
-		//test
-		player.getTimer().setTaskDuration(50);
-		player.getTimer().init();
+
 	}
 	
 	public synchronized void stop() throws InterruptedException {
 		if (isRunning()) {
 			setRunning(false); //thread will stop auto, because it exits loop
 			//test
-			player.getTimer().destroy();
+
 			devstream.println("Game loop stopped");
 		}
 	}
@@ -103,7 +103,7 @@ public class Game implements Runnable {
 	}
 
 	public void updateGameState() {
-		player.getTimer().perform();
+		mainframe.update();
 	}
 
 	public void render() {

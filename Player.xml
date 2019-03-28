@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Player>
+    <nLevel>1</nLevel>
+    <nStatPoints>0</nStatPoints>
+    <nSkillPoints>0</nSkillPoints>
+    <nEp>100</nEp>
+    <nAktEP>0</nAktEP>
+    <nHP>500</nHP>
+    <nAktHP>500</nAktHP>
+    <nMP>100</nMP>
+    <nnAktMP>100</nnAktMP>
+    <nStrength>5</nStrength>
+    <nDefence>5</nDefence>
+    <nIntelligence>5</nIntelligence>
+    <nSkillLevelFire>1</nSkillLevelFire>
+    <nSkillLevelIce>1</nSkillLevelIce>
+    <nSkillLevelEarth>1</nSkillLevelEarth>
+    <nSkillLevelBlood>1</nSkillLevelBlood>
+</Player>

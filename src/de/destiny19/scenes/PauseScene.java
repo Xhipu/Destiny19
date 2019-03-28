@@ -8,7 +8,12 @@ import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Game;
+import de.destiny19.scenes.GameScene;
 import de.destiny19.ui.UIButton;
+
+import de.destiny19.player.Player;
+import de.destiny19.player.PlayerInventory;
+import de.destiny19.player.XMLParser;
 
 public class PauseScene extends JPanel {
 	private UIButton bnresume, bnsave, bnquit;
@@ -34,6 +39,13 @@ public class PauseScene extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent me) {
 				parent.setScene(Game.GAMESTATE.GAME);
+			}
+		});
+
+		bnsave.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent me) {
+				Frame.game.save();
 			}
 		});
 		
