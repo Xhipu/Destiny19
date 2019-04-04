@@ -12,13 +12,17 @@ public class UILog extends UIElement{
 
 	public UILog(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		super.setBackground(Color.BLACK);
+		setBackground(Color.GRAY);
 
 		m_label = new JLabel();
 		m_label.setBounds(getBounds());
 		m_label.setHorizontalTextPosition(SwingConstants.CENTER);
 
 		add(m_label);
+	}
+	
+	@Override public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 	}
 
 	public void log(String strMessage, int nType){

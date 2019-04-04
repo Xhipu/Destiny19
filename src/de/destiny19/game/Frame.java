@@ -11,6 +11,7 @@ import de.destiny19.scenes.GameScene;
 import de.destiny19.scenes.PauseScene;
 import de.destiny19.scenes.TitleScene;
 import java.awt.CardLayout;
+import java.io.IOException;
 
 public class Frame extends JFrame {
 	
@@ -35,10 +36,13 @@ public class Frame extends JFrame {
 			Main.devstream.println("Could not set LnF - "+e.getLocalizedMessage());
 		}
 		
-		//frame is now set, so load game scenes
-		title = new TitleScene(this);
-		game = new GameScene(this);
-		pause = new PauseScene(this);
+		try {
+			title = new TitleScene(this);
+			game = new GameScene(this);
+			pause = new PauseScene(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		getContentPane().setLayout(new CardLayout(0, 0));
 		
 		getContentPane().add(title, "title");

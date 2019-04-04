@@ -1,5 +1,6 @@
 package de.destiny19.ui;
 
+import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 
@@ -8,6 +9,7 @@ public class UIStaticPanel extends UIElement{
 
 	public UIStaticPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
+		setBackground(Color.GRAY);
 	}
 	
 	public void setPicture(File file) {
