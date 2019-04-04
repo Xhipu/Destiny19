@@ -29,9 +29,9 @@
 	<target name="redeploy" depends="clean,deploy"/>
 
 	<target name="release" depends="rebuild">
-		<delete dir="Release"/>
-		<mkdir dir="Release"/>
-		<jar destfile="Release/${ant.project.name}.jar"
+		<delete dir="${INSTALL}"/>
+		<mkdir dir="${INSTALL}"/>
+		<jar destfile="${INSTALL}/${ant.project.name}.jar"
 			  basedir="${comp}">
 			  <manifest>
 				  <attribute name="Main-Class" value="${main}"/>

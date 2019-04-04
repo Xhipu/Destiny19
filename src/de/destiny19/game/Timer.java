@@ -21,7 +21,7 @@ public abstract class Timer {
 	@XmlElement(name="m_lnTaskDuration", required = true)
 	private long m_lnTaskDuration;
 	@XmlElement(name="step", required = true)
-	private long step;
+	public long step;
 	
 	public abstract void doAction();
 
