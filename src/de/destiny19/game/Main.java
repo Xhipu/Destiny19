@@ -3,6 +3,8 @@ package de.destiny19.game;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+
+import de.destiny19.logic.Enemy;
 import de.destiny19.player.Player;
 import de.destiny19.ui.UILog;
 
@@ -127,7 +129,7 @@ public class Main implements Runnable {
 		} catch (Exception e) {
 			System.out.println("Starting in release");
 			devstream = new PrintStream(new OutputStream() {
-				public void write(int arg0) throws IOException {return;}
+				public void write(int n) throws IOException {return;}
 			});
 		}
 		Main game = new Main();
@@ -150,5 +152,9 @@ public class Main implements Runnable {
 
 	public static UILog getGameConsole(){
 		return mainframe.game.console;
+	}
+	
+	public static Enemy GetCurrentEnemy() throws Exception {
+		return mainframe.game.enemySpawn.getInstances().get(0);
 	}
 }

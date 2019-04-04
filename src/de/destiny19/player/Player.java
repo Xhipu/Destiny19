@@ -140,6 +140,7 @@ public class Player {
     public void GetHeal (int _nHeal) {
         if((nAktHP += _nHeal) >= nHP) {
             nAktHP = nHP;
+            Main.devstream.printf("Healed for %d\n", _nHeal);
         } else {
             nAktHP += _nHeal;
         }
@@ -317,11 +318,19 @@ public class Player {
 		setTimer(new Timer() {
 			@Override
 			public void doAction() {
-				Main.devstream.println("Test");
+				int eHP;
+				try {
+					eHP = Main.GetCurrentEnemy().getHP();
+					eHP -= 2; //getStrength()
+					Main.GetCurrentEnemy().setHP(eHP);
+				} catch (Exception e) {
+					Main.devstream.println("No enemy");
+				}
+				GetHeal(2);
+			
 			}
         });
-        getTimer().setTaskDuration(30);
+        getTimer().setTaskDuration(60);
         getTimer().init();
 	}
-
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -11,7 +12,8 @@ import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Main;
-import de.destiny19.game.Timer;
+import de.destiny19.logic.Enemy;
+import de.destiny19.logic.Spawner;
 import de.destiny19.player.Player;
 import de.destiny19.ui.UIButton;
 import de.destiny19.ui.UILog;
@@ -27,6 +29,7 @@ public class GameScene extends JPanel {
 
 	public Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	public PlayerInventory inv;
+	public Spawner<Enemy> enemySpawn;
 	
 	public GameScene(Frame parent) {
 		setSize(parent.getSize());
@@ -65,6 +68,16 @@ public class GameScene extends JPanel {
 		add(pnPlayerStats);
 		add(pnSkills);
 		add(console);
+		
+		enemySpawn = new Spawner<Enemy>(300) {
+			@Override public void addInstance() {
+				
+				if(getInstances().isEmpty()) {
+					getInstances().add(new Enemy(1));
+					Main.devstream.println("New enemy spawned");
+				}
+			}
+		};
 	}
 	
 	public void processInput() {
@@ -72,11 +85,27 @@ public class GameScene extends JPanel {
 	}
 	
 	public void updateGameState() {
-		//player.getTimer().destroy();
+		enemySpawn.spawn();
+		
+		if(enemySpawn.getInstances().isEmpty())
+			return;
+		
+		Iterator<Enemy> iter = enemySpawn.getInstances().iterator();
+		while(iter.hasNext()) {
+			Enemy en = iter.next();
+			if(en.getHP()-2 <= 0) {
+				iter.remove();
+				enemySpawn.spawn();
+			}
+			else 
+				en.getTimer().perform();
+		}
+		
 		player.getTimer().perform();
 	}
 
 	public void render() {
+		console.log(String.format("HP: %d", getPlayer().GetAktHP()), 0);
 		repaint();
 	}
 	

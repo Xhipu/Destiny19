@@ -1,1 +1,1 @@
-ant release
+ant release -DINSTALL=%C:\Destiny19%

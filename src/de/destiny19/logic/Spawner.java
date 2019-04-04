@@ -1,6 +1,5 @@
 package de.destiny19.logic;
 
-import de.destiny19.game.Main;
 import de.destiny19.game.Timer;
 
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public abstract class Spawner<T> {
             @Override
             public void doAction() {
                 addInstance();
-                Main.devstream.println("Spawned one element");
             }
         };
         m_timer.setTaskDuration(duration);
