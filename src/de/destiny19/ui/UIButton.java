@@ -17,7 +17,7 @@ public class UIButton extends UIElement {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
-				setBackground(Color.MAGENTA);
+				setBackground(Color.decode("#bb0000"));
 			}
 			@Override
 			public void mouseExited(MouseEvent arg0) {
@@ -41,6 +41,6 @@ public class UIButton extends UIElement {
 		lblText.setFont(new Font("Microsoft YaHei UI Light", Font.BOLD, 35));
 		lblText.setHorizontalAlignment(SwingConstants.CENTER);
 		lblText.setForeground(new Color(255, 255, 255));
-		add(lblText/*, BorderLayout.CENTER*/);
+		add(lblText);
 	}
 }

@@ -1,11 +1,16 @@
 package de.destiny19.scenes;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
@@ -26,12 +31,15 @@ public class GameScene extends JPanel {
 	private UIButton bnPause;
 	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
 	public UILog console;
+	private Image imgBg;
 
 	public Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 	public PlayerInventory inv;
 	public Spawner<Enemy> enemySpawn;
 	
-	public GameScene(Frame parent) {
+	public GameScene(Frame parent) throws IOException {
+		imgBg = ImageIO.read(new File("./res/Background.jpg"));
+		
 		setSize(parent.getSize());
 		setBackground(Color.BLACK);
 		setLayout(null);
@@ -78,6 +86,11 @@ public class GameScene extends JPanel {
 				}
 			}
 		};
+	}
+	
+	@Override public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(imgBg, 0, 0, this.getWidth(), this.getHeight(), Main.mainframe);
 	}
 	
 	public void processInput() {
