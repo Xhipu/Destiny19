@@ -1,5 +1,6 @@
 <project name="Destiny19">
 	<property name="src" value="./src"/>
+	<property name="res" value="./res"/>
 	<property name="bin" value="./bin"/>
 	<property name="comp" value="${bin}/temp"/>
 	<property name="dist" value="${bin}/Destiny19"/>
@@ -17,6 +18,7 @@
 
 	<target name="deploy" depends="build">
 		<mkdir dir="${dist}"/>
+		<copydir src="${res}" dest="${dist}/${res}"></copydir>
 		<jar destfile="${dist}/${ant.project.name}.jar"
 			  basedir="${comp}">
 			  <manifest>
