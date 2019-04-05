@@ -35,11 +35,9 @@ public class XMLParser {
             marshaller.marshal(je, os);
 
 
-            Main.devstream.println("Player save successfully");
+            Main.devstream.println("\nPlayer saved!");
         }catch (Exception e) {
-
-            Main.devstream.println("Player save failed");
-            Main.devstream.println(e);
+            Main.devstream.println("\nCould not save player - "+e.getMessage());
         }
     }
     
@@ -52,11 +50,11 @@ public class XMLParser {
 
             player.setTimer(player.getTimer());
 
-            Main.devstream.print("player load successful");
+            Main.devstream.println("\nPlayer loaded!");
             return player;
 
         } catch (Exception ex) {
-            Main.devstream.println(ex);
+            Main.devstream.println("\nCould not load player - "+ex.getMessage());
         }
 
         return null;
@@ -73,11 +71,9 @@ public class XMLParser {
             JAXBElement<PlayerInventory> je =  objectFactory.createPlayerInventory(Main.mainframe.game.inv);
             marshaller.marshal(je, os);
 
-            Main.devstream.println("PlayerInventory save successfully");
+            Main.devstream.println("Inventory saved!\n");
         }catch (Exception e) {
-
-            Main.devstream.println("PlayerInventory save failed");
-            Main.devstream.println(e);
+            Main.devstream.println("Could not save inventory - "+e.getMessage()+"\n");
         }
     }
 
@@ -89,11 +85,11 @@ public class XMLParser {
             PlayerInventory inv = (PlayerInventory) unmarshallerObj.unmarshal(file);
 
 
-            Main.devstream.print("playerinventory load successful");
+            Main.devstream.println("Inventory loaded!\n");
             return inv;
 
         } catch (Exception ex) {
-            Main.devstream.println(ex);
+            Main.devstream.println("Could not load inventory - "+ex.getMessage()+"\n");
         }
 
         return null;

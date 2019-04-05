@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
 import de.destiny19.game.Main;
-import de.destiny19.ui.UIButton;
+import de.destiny19.ui.Button;
 
 public class PauseScene extends JPanel {
-	private UIButton bnresume, bnsave, bnquit;
+	private Button bnresume, bnsave, bnquit;
 	private static final long serialVersionUID = -538876308913834126L;
 	private Image imgBg;
 	
@@ -28,13 +28,13 @@ public class PauseScene extends JPanel {
 		setBackground(Color.BLACK);
 		setLayout(null);
 		
-		bnresume=new UIButton("Resume", 
+		bnresume=new Button("Resume", 
 				(int)getBounds().getCenterX()-300, 70,
 				600, 150 );
-		bnsave=new UIButton("Save", 
+		bnsave=new Button("Save", 
 				(int)getBounds().getCenterX()-300, 270,
 				600, 150 );
-		bnquit=new UIButton("Quit", 
+		bnquit=new Button("Quit", 
 				(int)getBounds().getCenterX()-300, 480,
 				600, 150 );
 		

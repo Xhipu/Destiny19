@@ -20,20 +20,20 @@ import de.destiny19.game.Main;
 import de.destiny19.logic.Enemy;
 import de.destiny19.logic.Spawner;
 import de.destiny19.player.Player;
-import de.destiny19.ui.UIButton;
-import de.destiny19.ui.UILog;
-import de.destiny19.ui.UIStaticPanel;
+import de.destiny19.ui.Button;
+import de.destiny19.ui.Log;
+import de.destiny19.ui.StaticPanel;
 import de.destiny19.player.PlayerInventory;
 import de.destiny19.player.XMLParser;
 
 public class GameScene extends JPanel {
 	private static final long serialVersionUID = 7486454402469771687L;
-	private UIButton bnPause;
-	private UIStaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
-	public UILog console;
+	private Button bnPause;
+	private StaticPanel pnEnemy, pnEnemyStats, pnPlayer, pnPlayerStats, pnSkills;
+	public Log console;
 	private Image imgBg;
 
-	public Player player = new Player(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	public Player player;
 	public PlayerInventory inv;
 	public Spawner<Enemy> enemySpawn;
 	
@@ -54,14 +54,14 @@ public class GameScene extends JPanel {
 			
 		};
     
-		pnEnemy = new UIStaticPanel(50, 50, 350, 350); //+200
-		pnEnemyStats = new UIStaticPanel(50, 450, 350, 250);
-		pnPlayer = new UIStaticPanel(600, 50, 350, 350);
-		pnPlayerStats = new UIStaticPanel(600, 450, 350, 250);
-		pnSkills = new UIStaticPanel(450, 50, 100, 650);
-		console = new UILog(950, 565, getWidth()-955, getHeight()-600);
+		pnEnemy = new StaticPanel(50, 50, 350, 350); //+200
+		pnEnemyStats = new StaticPanel(50, 450, 350, 250);
+		pnPlayer = new StaticPanel(600, 50, 350, 350);
+		pnPlayerStats = new StaticPanel(600, 450, 350, 250);
+		pnSkills = new StaticPanel(450, 50, 100, 650);
+		console = new Log(950, 565, getWidth()-955, getHeight()-600);
 		
-		bnPause = new UIButton("II", getWidth()-65, 0, 60, 60);
+		bnPause = new Button("II", getWidth()-65, 0, 60, 60);
 		bnPause.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
@@ -91,6 +91,14 @@ public class GameScene extends JPanel {
 	@Override public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(imgBg, 0, 0, this.getWidth(), this.getHeight(), Main.mainframe);
+		g.setColor(Color.CYAN);
+		int hpBarWidth = (player.GetAktEP() * getWidth()) / player.GetEP();
+		
+		try {
+			g.fillRect(0, getHeight()-10, hpBarWidth, 10);
+		} catch(Exception e) {
+			g.fillRect(0, getHeight()-10, 0, 10);
+		}
 	}
 	
 	public void processInput() {
@@ -106,7 +114,9 @@ public class GameScene extends JPanel {
 		Iterator<Enemy> iter = enemySpawn.getInstances().iterator();
 		while(iter.hasNext()) {
 			Enemy en = iter.next();
-			if(en.getHP()-2 <= 0) {
+			if(en.getHP()-2 < -20) {
+				player.AddEP(10);
+				Main.getGameConsole().log(String.format("Earned %d XP", 10), 1);
 				iter.remove();
 				enemySpawn.spawn();
 			}
@@ -118,7 +128,6 @@ public class GameScene extends JPanel {
 	}
 
 	public void render() {
-		console.log(String.format("HP: %d", getPlayer().GetAktHP()), 0);
 		repaint();
 	}
 	

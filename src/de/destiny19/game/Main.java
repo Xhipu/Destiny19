@@ -6,7 +6,7 @@ import java.io.PrintStream;
 
 import de.destiny19.logic.Enemy;
 import de.destiny19.player.Player;
-import de.destiny19.ui.UILog;
+import de.destiny19.ui.Log;
 
 public class Main implements Runnable {
 	public static PrintStream devstream;
@@ -60,7 +60,7 @@ public class Main implements Runnable {
 	public synchronized void start() {
 		mainframe = new Frame(GAMESTATE.TITLE);
 		mainframe.setVisible(true);
-		devstream.println("Starting game loop");
+		devstream.println("Starting game loop\n----------------------");
 		gThread = new Thread(this);
 		gThread.start();
 		setRunning(true);
@@ -149,8 +149,12 @@ public class Main implements Runnable {
 		plRet = mainframe.game.getPlayer();
 		return plRet;
 	}
+	
+	public static void SetPlayer(Player _player) {
+		mainframe.game.player =  _player;
+	}
 
-	public static UILog getGameConsole(){
+	public static Log getGameConsole(){
 		return mainframe.game.console;
 	}
 	

@@ -85,7 +85,7 @@ public class Player {
         return nEP;
     }
 
-    public int GetnAktEP () {
+    public int GetAktEP () {
         return nAktEP;
     }
 
@@ -321,7 +321,7 @@ public class Player {
 				int eHP;
 				try {
 					eHP = Main.GetCurrentEnemy().getHP();
-					eHP -= 2; //getStrength()
+					eHP -= 20; //getStrength()
 					Main.GetCurrentEnemy().setHP(eHP);
 				} catch (Exception e) {
 					Main.devstream.println("No enemy");

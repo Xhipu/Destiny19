@@ -29,6 +29,7 @@ public class Frame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1200, 800);
 		setLocationRelativeTo(null);
+		setTitle("Destiny19");
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
@@ -60,17 +61,14 @@ public class Frame extends JFrame {
 		case TITLE:
 			mode = 0;
 			cl.show(getContentPane(), "title");
-			Main.devstream.println("Scene - Title");
 			break;
 		case GAME:
 			mode = 1;
 			cl.show(getContentPane(), "game");
-			Main.devstream.println("Scene - Game");
 			break;
 		case PAUSE:
 			mode = 2;
 			cl.show(getContentPane(), "pause");
-			Main.devstream.println("Scene - Pause");
 			break;
 		}
 		
