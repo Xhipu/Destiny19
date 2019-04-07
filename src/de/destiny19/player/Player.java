@@ -80,6 +80,17 @@ public class Player {
         nSkillPoints += _nLevel;
         nStatPoints += _nLevel;
         nEP *= 2;
+        nAktEP = 0;
+    }
+
+    public void levelUp(int hpUp, int mpUp, int def) { //use this since its more defined
+        nLevel++;
+        nHP+=hpUp;
+        nMP+=mpUp;
+        nSkillPoints++;
+        nStatPoints++;
+        nEP*=2;
+        nAktEP = 0;
     }
 
     public int GetEP () {
@@ -92,9 +103,13 @@ public class Player {
 
     public void AddEP (int _nEP) {
         if((nAktEP + _nEP) >= nEP){
-            LevelUp(1);
+            levelUp(10, 10, 1);
+            int deltaHp = nHP - nAktHP;
+            GetHeal(deltaHp);
+            Logger.trace("Level up!\n");
         }else {
             nAktEP += _nEP;
+            Logger.trace(String.format("XP: %d / %d", nAktEP, nEP));
         }
     }
 

@@ -5,6 +5,7 @@ import de.destiny19.logic.Enemy;
 import de.destiny19.player.Player;
 import de.destiny19.ui.Log;
 
+@SuppressWarnings({"serial", "unused"})
 public class Main implements Runnable {
 	public static GameConfigInjector confInjector;
 	public static GameObjectInjector objInjector;
@@ -26,14 +27,6 @@ public class Main implements Runnable {
 			sync(1000/confInjector.FPS);
 		}
 		mainframe.dispose();
-	}
-
-	public Thread getThread() {
-		return gThread;
-	}
-
-	public void setThread(Thread gThread) {
-		this.gThread = gThread;
 	}
 	
 	public synchronized void start() {
@@ -117,14 +110,6 @@ public class Main implements Runnable {
 
 		Main game = new Main();
 		game.start();
-	}
-
-	public Frame getMainframe() {
-		return mainframe;
-	}
-
-	public void setMainframe(Frame mainframe) {
-		Main.mainframe = mainframe;
 	}
 	
 	public static Player GetPlayer() {
