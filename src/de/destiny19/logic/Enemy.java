@@ -16,8 +16,8 @@ public class Enemy {
 		setTimer(new Timer() {
 			@Override
 			public void doAction() {
-				Main.GetPlayer().GetDamage(m_nDmg);
-				Logger.trace("Current hp: "+Main.GetPlayer().GetAktHP());
+				Main.GetPlayer().damage(m_nDmg);
+				Logger.trace("Current hp: "+Main.GetPlayer().getAktHP());
 			}
 		});
 		getTimer().init();

@@ -93,7 +93,7 @@ public class GameScene extends JPanel {
 		super.paintComponent(g);
 		g.drawImage(imgBg, 0, 0, this.getWidth(), this.getHeight(), Main.mainframe);
 		g.setColor(Color.CYAN);
-		int hpBarWidth = (player.GetAktEP() * getWidth()) / player.GetEP();
+		int hpBarWidth = (player.getAktEP() * getWidth()) / player.getEP();
 		
 		try {
 			g.fillRect(0, getHeight()-10, hpBarWidth, 10);
@@ -116,7 +116,7 @@ public class GameScene extends JPanel {
 		while(iter.hasNext()) {
 			Enemy en = iter.next();
 			if(en.getHP()-2 < -20) {
-				player.AddEP(10);
+				player.addEP(10);
 				Main.getGameConsole().log(String.format("Earned %d XP", 10), 1);
 				iter.remove();
 				enemySpawn.spawn();
@@ -126,6 +126,7 @@ public class GameScene extends JPanel {
 		}
 		
 		player.getTimer().perform();
+		player.m_heal.perform();
 	}
 
 	public void render() {
