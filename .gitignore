@@ -3,8 +3,15 @@
 Player.xml
 PlayerInventory.xml
 Destiny19.iml
+Destiny19.ipr
+Destiny19.iws
 .idea/encodings.xml
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
+/bin/
+
+/settings/
+/idea/
+/out/

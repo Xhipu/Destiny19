@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import de.destiny19.game.Frame;
-import de.destiny19.game.Main;
+import de.destiny19.Main;
 import de.destiny19.ui.Button;
 
 public class PauseScene extends JPanel {

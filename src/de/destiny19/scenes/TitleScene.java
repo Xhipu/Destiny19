@@ -12,9 +12,10 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import de.destiny19.Logger;
 import de.destiny19.game.Frame;
 import de.destiny19.player.XMLParser;
-import de.destiny19.game.Main;
+import de.destiny19.Main;
 import de.destiny19.ui.Button;
 import de.destiny19.player.Player;
 import de.destiny19.player.PlayerInventory;
@@ -66,7 +67,7 @@ public class TitleScene extends JPanel {
 					Main.GetPlayer().initTimer();
 					parent.setScene(Main.GAMESTATE.GAME);
 				}catch (Exception e) {
-					Main.devstream.println("No player save found!");
+					Logger.trace("No player save found!");
 				}
 
 			}

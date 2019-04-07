@@ -8,7 +8,8 @@ import javax.xml.bind.*;
 import javax.xml.namespace.QName;
 import javax.xml.bind.annotation.*;
 
-import de.destiny19.game.Main;
+import de.destiny19.Logger;
+import de.destiny19.Main;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -35,9 +36,9 @@ public class XMLParser {
             marshaller.marshal(je, os);
 
 
-            Main.devstream.println("\nPlayer saved!");
+            Logger.trace("\nPlayer saved!");
         }catch (Exception e) {
-            Main.devstream.println("\nCould not save player - "+e.getMessage());
+            Logger.trace("\nCould not save player - "+e.getMessage());
         }
     }
     
@@ -50,11 +51,11 @@ public class XMLParser {
 
             player.setTimer(player.getTimer());
 
-            Main.devstream.println("\nPlayer loaded!");
+            Logger.trace("\nPlayer loaded!");
             return player;
 
         } catch (Exception ex) {
-            Main.devstream.println("\nCould not load player - "+ex.getMessage());
+            Logger.trace("\nCould not load player - "+ex.getMessage());
         }
 
         return null;
@@ -71,9 +72,9 @@ public class XMLParser {
             JAXBElement<PlayerInventory> je =  objectFactory.createPlayerInventory(Main.mainframe.game.inv);
             marshaller.marshal(je, os);
 
-            Main.devstream.println("Inventory saved!\n");
+            Logger.trace("Inventory saved!\n");
         }catch (Exception e) {
-            Main.devstream.println("Could not save inventory - "+e.getMessage()+"\n");
+            Logger.trace("Could not save inventory - "+e.getMessage()+"\n");
         }
     }
 
@@ -85,11 +86,11 @@ public class XMLParser {
             PlayerInventory inv = (PlayerInventory) unmarshallerObj.unmarshal(file);
 
 
-            Main.devstream.println("Inventory loaded!\n");
+            Logger.trace("Inventory loaded!\n");
             return inv;
 
         } catch (Exception ex) {
-            Main.devstream.println("Could not load inventory - "+ex.getMessage()+"\n");
+            Logger.trace("Could not load inventory - "+ex.getMessage()+"\n");
         }
 
         return null;

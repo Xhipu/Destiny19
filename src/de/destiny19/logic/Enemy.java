@@ -1,6 +1,7 @@
 package de.destiny19.logic;
 
-import de.destiny19.game.Main;
+import de.destiny19.Logger;
+import de.destiny19.Main;
 import de.destiny19.game.Timer;
 
 public class Enemy {
@@ -11,12 +12,12 @@ public class Enemy {
 		setLevel(nLevel);
 		setHP(100);
 		setAtkSpeed(120); //1s 
-		m_nDmg = 10;
+		m_nDmg = 5;
 		setTimer(new Timer() {
 			@Override
 			public void doAction() {
-				Main.GetPlayer().GetDamage(m_nDmg);
-				Main.devstream.println("Current hp: "+Main.GetPlayer().GetAktHP());
+				Main.GetPlayer().damage(m_nDmg);
+				Logger.trace("Current hp: "+Main.GetPlayer().getAktHP());
 			}
 		});
 		getTimer().init();
@@ -43,7 +44,7 @@ public class Enemy {
 
 	public void setHP(int m_nHP) {
 		this.m_nHP = m_nHP;
-		Main.devstream.println("Enemy HP: "+getHP());
+		Logger.trace("Enemy HP: "+getHP());
 	}
 
 	public int getAtkSpeed() {
