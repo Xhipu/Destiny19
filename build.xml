@@ -5,7 +5,7 @@
 	<property name="comp" value="${bin}/temp"/>
 	<property name="dist" value="${bin}/Destiny19"/>
 	<!-- Main class -->
-	<property name="main" value="de.destiny19.game.Main"/>
+	<property name="main" value="de.destiny19.Main"/>
 
 	<target name="clean">
 		<delete dir="${bin}"/>

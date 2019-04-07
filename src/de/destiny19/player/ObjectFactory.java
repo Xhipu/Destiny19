@@ -4,9 +4,7 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.*;
 import javax.xml.namespace.QName;
 
-import de.destiny19.game.Main;
-import de.destiny19.player.Player;
-import de.destiny19.player.PlayerInventory;
+import de.destiny19.Main;
 import de.destiny19.game.Timer;
 
 @XmlRegistry

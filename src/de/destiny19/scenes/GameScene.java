@@ -15,8 +15,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JPanel;
 
+import de.destiny19.Logger;
 import de.destiny19.game.Frame;
-import de.destiny19.game.Main;
+import de.destiny19.Main;
 import de.destiny19.logic.Enemy;
 import de.destiny19.logic.Spawner;
 import de.destiny19.player.Player;
@@ -82,7 +83,7 @@ public class GameScene extends JPanel {
 				
 				if(getInstances().isEmpty()) {
 					getInstances().add(new Enemy(1));
-					Main.devstream.println("New enemy spawned");
+					Logger.trace("New enemy spawned");
 				}
 			}
 		};
@@ -141,8 +142,8 @@ public class GameScene extends JPanel {
 			xml.savePlayer();
 			xml.saveInventory();
 		}catch (Exception e) {
-			Main.devstream.println("Save failed");
-			Main.devstream.println(e);
+			Logger.trace("Save failed");
+			Logger.trace(e.getMessage());
 
 		}
 

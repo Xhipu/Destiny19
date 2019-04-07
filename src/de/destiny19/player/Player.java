@@ -1,6 +1,7 @@
 package de.destiny19.player;
 
-import de.destiny19.game.Main;
+import de.destiny19.Logger;
+import de.destiny19.Main;
 import de.destiny19.game.Timer;
 
 import javax.xml.bind.annotation.*;
@@ -140,7 +141,7 @@ public class Player {
     public void GetHeal (int _nHeal) {
         if((nAktHP += _nHeal) >= nHP) {
             nAktHP = nHP;
-            Main.devstream.printf("Healed for %d\n", _nHeal);
+            Logger.trace(String.format("Healed for %d\n", _nHeal));
         } else {
             nAktHP += _nHeal;
         }
@@ -324,7 +325,7 @@ public class Player {
 					eHP -= 20; //getStrength()
 					Main.GetCurrentEnemy().setHP(eHP);
 				} catch (Exception e) {
-					Main.devstream.println("No enemy");
+                    Logger.trace("No enemy");
 				}
 				GetHeal(2);
 			

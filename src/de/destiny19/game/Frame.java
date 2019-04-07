@@ -6,53 +6,39 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import de.destiny19.game.Main.GAMESTATE;
+import de.destiny19.Injectable;
+import de.destiny19.Logger;
+import de.destiny19.Main;
 import de.destiny19.scenes.GameScene;
 import de.destiny19.scenes.PauseScene;
 import de.destiny19.scenes.TitleScene;
 import java.awt.CardLayout;
-import java.io.IOException;
 
+@SuppressWarnings("serial")
 public class Frame extends JFrame {
-	
-	private static final long serialVersionUID = 4774938382079844594L;
-	public TitleScene title; 	
-	public GameScene game;
-	public PauseScene pause;
+	@Injectable public TitleScene title;
+	@Injectable public GameScene game;
+	@Injectable public PauseScene pause;
+
 	public int mode;
 
 	/**
 	 * Create the frame.
 	 */
-	public Frame(Main.GAMESTATE state) {
+	public Frame(String strTitle, int nWidth, int nHeight) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(1200, 800);
+		setSize(nWidth, nHeight);
 		setLocationRelativeTo(null);
-		setTitle("Destiny19");
+		setTitle(strTitle);
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			Main.devstream.println("Could not set LnF - "+e.getLocalizedMessage());
+			Logger.trace("Could not set LnF - "+e.getLocalizedMessage());
 		}
-		
-		try {
-			title = new TitleScene(this);
-			game = new GameScene(this);
-			pause = new PauseScene(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+
 		getContentPane().setLayout(new CardLayout(0, 0));
-		
-		getContentPane().add(title, "title");
-		getContentPane().add(game, "game");
-		getContentPane().add(pause, "pause");
-		
-		setScene(GAMESTATE.TITLE);
-		//TODO: add the canvas depending on the game scene
-		//TitleScene extends Canvas
 	}
 	
 	public void setScene(Main.GAMESTATE state) {
@@ -83,4 +69,19 @@ public class Frame extends JFrame {
 
 	public void update(){
     }
+
+	public void initTitle(TitleScene title) {
+		this.title = title;
+		getContentPane().add(title, "title");
+	}
+
+	public void initGame(GameScene game) {
+		this.game = game;
+		getContentPane().add(game, "game");
+	}
+
+	public void initPause(PauseScene pause) {
+		this.pause = pause;
+		getContentPane().add(pause, "pause");
+	}
 }
