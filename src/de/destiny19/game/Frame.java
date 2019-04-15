@@ -21,10 +21,7 @@ public class Frame extends JFrame {
 	@Injectable public PauseScene pause;
 
 	public int mode;
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public Frame(String strTitle, int nWidth, int nHeight) {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

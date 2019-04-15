@@ -21,9 +21,9 @@ import de.destiny19.player.Player;
 import de.destiny19.player.PlayerInventory;
 
 
+@SuppressWarnings("serial")
 public class TitleScene extends JPanel {
 	private Button bnnew, bnload, bnquit;
-	private static final long serialVersionUID = -538876308913834126L;
 	private static XMLParser xml;
 	private Image imgBg;
 
@@ -49,7 +49,7 @@ public class TitleScene extends JPanel {
 		bnnew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				Main.SetPlayer(new Player(1, 0, 0, 100, 0, 100, 100, 100, 100, 2, 1, 0, 1, 1, 1, 1));
+				Main.SetPlayer(new Player(1, 0, 0, 100, 0, 100, 100, 100, 100, 10, 1, 0, 1, 1, 1, 1));
 				Main.mainframe.game.inv		= new PlayerInventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				Main.GetPlayer().initTimer();
 				parent.setScene(Main.GAMESTATE.GAME);

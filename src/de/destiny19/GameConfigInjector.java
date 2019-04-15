@@ -10,4 +10,8 @@ public class GameConfigInjector {
         HEIGHT = 800;
         FPS = 60;
     }
+    
+    public int FrameCount(int nMultiply) {
+    	return nMultiply * FPS;
+    }
 }

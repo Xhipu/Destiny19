@@ -5,10 +5,10 @@ import de.destiny19.logic.Enemy;
 import de.destiny19.player.Player;
 import de.destiny19.ui.Log;
 
-@SuppressWarnings({"serial", "unused"})
 public class Main implements Runnable {
 	public static GameConfigInjector confInjector;
 	public static GameObjectInjector objInjector;
+	public static boolean _DEBUG;
 	
 	public enum GAMESTATE {TITLE, GAME, PAUSE}
 	
@@ -19,7 +19,6 @@ public class Main implements Runnable {
 	
 	@Override
 	public void run() {
-		//initialize the frame
 		while (isRunning()) {
 			processInput();
 			updateGameState();
@@ -33,7 +32,7 @@ public class Main implements Runnable {
 		mainframe = objInjector.FRAME;
 		mainframe.setScene(GAMESTATE.TITLE);
 		mainframe.setVisible(true);
-		Logger.trace("Starting game loop\n----------------------");
+		Logger.trace("Starting game loop\n-------------------------");
 		gThread = new Thread(this);
 		gThread.start();
 		setRunning(true);
@@ -43,7 +42,7 @@ public class Main implements Runnable {
 		if (isRunning()) {
 			setRunning(false); //thread will stop auto, because it exits loop
 			
-			Logger.trace("Game loop stopped");
+			Logger.trace("Game loop stopped\n-------------------------");
 		}
 	}
 
@@ -91,18 +90,18 @@ public class Main implements Runnable {
 		mainframe.render();
 	}
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws Exception {
 		confInjector = new GameConfigInjector();
 		objInjector = new GameObjectInjector();
 
-		try {
+		if(args.length > 0) {
 			if(args[0].equals("-d")) {
 				System.out.println("Starting in debug");
-			} else {
-				throw new Exception();
-			}
-		} catch (Exception e) {
+				_DEBUG = true;	
+			} else throw new Exception("Unknown initializing argument, try '-d' or none");
+		} else {
 			System.out.println("Starting in release");
+			_DEBUG = false;
 		}
 
 		confInjector.initialize();
@@ -122,7 +121,7 @@ public class Main implements Runnable {
 		mainframe.game.player =  _player;
 	}
 
-	public static Log getGameConsole(){
+	public static Log GetGameConsole(){
 		return mainframe.game.console;
 	}
 	

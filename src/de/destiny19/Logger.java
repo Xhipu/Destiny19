@@ -1,7 +1,5 @@
 package de.destiny19;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class Logger {
