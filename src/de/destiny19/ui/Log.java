@@ -12,7 +12,7 @@ public class Log extends Element{
 
 	public Log(int x, int y, int w, int h) {
 		super(x, y, w, h);
-		setBackground(Color.GRAY);
+		setBackground(Color.BLACK);
 
 		m_label = new JLabel();
 		m_label.setBounds(getBounds());

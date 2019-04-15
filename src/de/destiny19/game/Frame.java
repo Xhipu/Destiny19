@@ -13,6 +13,7 @@ import de.destiny19.scenes.GameScene;
 import de.destiny19.scenes.PauseScene;
 import de.destiny19.scenes.TitleScene;
 import java.awt.CardLayout;
+import java.awt.image.BufferStrategy;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame {

@@ -12,7 +12,8 @@ public class Enemy {
 		setHP(100);
 		setMaxHp(100);
 		setAtkSpeed(120); //1s 
-		m_nDmg = 2;
+		m_nDmg = 5;
+		scale(nLevel);
 		setTimer(new Timer() {
 			@Override
 			public void doAction() {
@@ -25,12 +26,9 @@ public class Enemy {
 	
 	public void scale(int nCount) {
 		setHP(getHP() + nCount*2);
+		setMaxHp((getMaxHp() + nCount*2));
 		m_nDmg += nCount;
 		setAtkSpeed(getAtkSpeed() + nCount);
-	}
-
-	public int getLevel() {
-		return m_nLevel;
 	}
 
 	public void setLevel(int m_nLevel) {
@@ -67,5 +65,17 @@ public class Enemy {
 
 	public void setMaxHp(int m_nMaxHp) {
 		this.m_nMaxHp = m_nMaxHp;
+	}
+
+	public int getDmg() {
+		return m_nDmg;
+	}
+
+	public void setDmg(int m_nDmg) {
+		this.m_nDmg = m_nDmg;
+	}
+
+	public int getLevel() {
+		return m_nLevel;
 	}
 }

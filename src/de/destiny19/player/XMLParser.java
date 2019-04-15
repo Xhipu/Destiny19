@@ -36,9 +36,9 @@ public class XMLParser {
             marshaller.marshal(je, os);
 
 
-            Logger.trace("\nPlayer saved!");
+            Logger.trace("Player saved!");
         }catch (Exception e) {
-            Logger.trace("\nCould not save player - "+e.getMessage());
+            Logger.trace("Could not save player - "+e.getMessage());
         }
     }
     
@@ -51,11 +51,11 @@ public class XMLParser {
 
             player.setTimer(player.getTimer());
 
-            Logger.trace("\nPlayer loaded!");
+            Logger.trace("Player loaded!");
             return player;
 
         } catch (Exception ex) {
-            Logger.trace("\nCould not load player - "+ex.getMessage());
+            Logger.trace("Could not load player - "+ex.getMessage());
         }
 
         return null;

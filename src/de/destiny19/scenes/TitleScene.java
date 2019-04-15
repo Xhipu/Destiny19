@@ -49,7 +49,7 @@ public class TitleScene extends JPanel {
 		bnnew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				Main.SetPlayer(new Player(1, 0, 0, 100, 0, 100, 100, 100, 100, 10, 1, 0, 1, 1, 1, 1));
+				Main.SetPlayer(new Player(1, 100, 0, 100, 100, 100, 100, 1));
 				Main.mainframe.game.inv		= new PlayerInventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				Main.GetPlayer().initTimer();
 				parent.setScene(Main.GAMESTATE.GAME);
