@@ -10,6 +10,7 @@ public class StaticPanel extends Element{
 	public StaticPanel(int x, int y, int w, int h) {
 		super(x, y, w, h);
 		setBackground(Color.GRAY);
+		setLayout(null);
 	}
 	
 	public void setPicture(File file) {

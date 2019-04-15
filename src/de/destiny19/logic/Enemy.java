@@ -1,23 +1,22 @@
 package de.destiny19.logic;
 
-import de.destiny19.Logger;
 import de.destiny19.Main;
 import de.destiny19.game.Timer;
 
 public class Enemy {
-	private int m_nLevel, m_nHP, m_nAtkSpeed, m_nDmg;
+	private int m_nLevel, m_nHP, m_nAtkSpeed, m_nDmg, m_nMaxHp;
 	private Timer m_timer;
 	
 	public Enemy(int nLevel) {
 		setLevel(nLevel);
 		setHP(100);
+		setMaxHp(100);
 		setAtkSpeed(120); //1s 
-		m_nDmg = 5;
+		m_nDmg = 2;
 		setTimer(new Timer() {
 			@Override
 			public void doAction() {
 				Main.GetPlayer().damage(m_nDmg);
-				Logger.trace("Current hp: "+Main.GetPlayer().getAktHP());
 			}
 		});
 		getTimer().init();
@@ -44,7 +43,6 @@ public class Enemy {
 
 	public void setHP(int m_nHP) {
 		this.m_nHP = m_nHP;
-		Logger.trace("Enemy HP: "+getHP());
 	}
 
 	public int getAtkSpeed() {
@@ -61,5 +59,13 @@ public class Enemy {
 
 	public void setTimer(Timer m_timer) {
 		this.m_timer = m_timer;
+	}
+
+	public int getMaxHp() {
+		return m_nMaxHp;
+	}
+
+	public void setMaxHp(int m_nMaxHp) {
+		this.m_nMaxHp = m_nMaxHp;
 	}
 }

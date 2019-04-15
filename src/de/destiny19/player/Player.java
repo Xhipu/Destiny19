@@ -46,7 +46,12 @@ public class Player {
     private Timer m_timer;
     @XmlTransient
     public Timer m_heal;
-
+    
+    //Skillkosten in ticks
+    private int nSkillACD, nSkillBCD, nSkillCCD, nSkillDCD;
+    private boolean bBerserk, bSkillA, bSkillB, bSkillC, bSkillD;
+    private int nBerserkCD;
+    
     public Player () {
         //Player(1, 0, 0, 100, 0,500, 500, 100 , 100, 5, 5, 5, 1, 1, 1, 1);
     }
@@ -68,6 +73,16 @@ public class Player {
         nSkillLevelIce = _nSkillLevelIce;
         nSkillLevelEarth = _nSkillLevelEarth;
         nSkillLevelBlood = _nSkillLevelBlood;
+        setSkillACD(5);
+        setSkillBCD(12); //healskill
+        setSkillCCD(6);
+        setSkillDCD(20);
+        setBerserkCD(5);
+        setBerserk(false);
+        setSkillA(false);
+        setSkillB(false);
+        setSkillC(false);
+        setSkillD(false);
     }
 
     public int getLevel() {
@@ -96,9 +111,15 @@ public class Player {
         if((nAktEP + _nEP) >= nEP){
             levelUp(10, 10, 1);
             int deltaHp = nHP - nAktHP;
-            heal(deltaHp);
-            Logger.trace("Level up!\n");
-        }else {
+            int deltaMp = nMP - nAktMP;
+            regen(deltaHp, deltaMp);
+            Logger.trace(String.format("Level up!\n\n"
+            		+ "Level: ------------%d\n"
+            		+ "Max. HP: ----------%d\n"
+            		+ "Max. MP: ----------%d\n"
+            		+ "XP for next level: %d\n",
+            		nLevel, nHP, nMP, nEP));
+        } else {
             nAktEP += _nEP;
             Logger.trace(String.format("XP: %d / %d", nAktEP, nEP));
         }
@@ -144,14 +165,18 @@ public class Player {
     	return nAktHP;
     }
 
-    public void heal(int _nHeal) {
+    public void regen(int _nHeal, int _nMana) {
         if((nAktHP += _nHeal) >= nHP) {
             nAktHP = nHP;
-            Logger.trace(String.format("Healed for %d", _nHeal));
         } else {
             nAktHP += _nHeal;
         }
-        
+            
+        if((nAktMP += _nMana) >= nMP) {
+        	nAktMP = nMP;
+        } else {
+        	nAktMP += _nMana;
+        }
     }
 
     public boolean damage(int _nDamage) {
@@ -328,10 +353,69 @@ public class Player {
 				int eHP;
 				try {
 					eHP = Main.GetCurrentEnemy().getHP();
-					eHP -= 20; //getStrength()
+					eHP -= nStrength; 
 					Main.GetCurrentEnemy().setHP(eHP);
 				} catch (Exception e) {
                     Logger.trace("No enemy");
+				}
+				
+				if(bSkillA) {
+					int nCD = nSkillACD;
+					if(nCD > 0) {
+						nCD--;
+						nSkillACD = nCD;
+						Logger.trace(String.format("Skill 1 Cooldown: %d", nSkillACD));
+					} else if(nCD <= 0) {
+						nSkillACD = 5;
+						setSkillA(false);
+					}
+				} else if(bSkillB) {
+					int nCD = nSkillBCD;
+					if(nCD > 0) {
+						nCD--;
+						nSkillBCD = nCD;
+						Logger.trace(String.format("Skill 2 Cooldown: %d", nSkillBCD));
+					} else if(nCD <= 0) {
+						nSkillBCD = 12;
+						setSkillB(false);
+					}
+				} else if(bSkillC) {
+					int nCD = nSkillCCD;
+					if(nCD > 0) {
+						nCD--;
+						nSkillCCD = nCD;
+						Logger.trace(String.format("Skill 3 Cooldown: %d", nSkillCCD));
+					} else if(nCD <= 0) {
+						nSkillCCD = 6;
+						setSkillC(false);
+					}
+				} else if(bSkillD) {
+					if(bBerserk) {
+						int nDuration = getBerserkCD();
+						if(nDuration > 0) {
+							nDuration--;
+							setBerserkCD(nDuration);
+							Logger.trace(String.format("Berserk Mode Time: %d", getBerserkCD()));
+						}
+						else if(nDuration <= 0) {
+							nStrength /= 2;
+							nHP /= 2;
+							nMP /= 2;
+							nAktHP /= 2;
+							nAktMP /= 2;
+							setBerserk(false);
+							setBerserkCD(5);
+						}
+					}
+					int nCD = nSkillDCD;
+					if(nCD > 0) {
+						nCD--;
+						nSkillDCD = nCD;
+						Logger.trace(String.format("Skill 4 Cooldown: %d", nSkillDCD));
+					} else if(nCD <= 0) {
+						nSkillDCD = 20;
+						setSkillD(false);
+					}
 				}
 			}
         });
@@ -339,12 +423,163 @@ public class Player {
 		m_heal = new Timer() {
             @Override
             public void doAction() {
-                heal(5);
+            	regen(1, 2);
             }
         };
         getTimer().setTaskDuration(60);
         getTimer().init();
         m_heal.setTaskDuration(30);
         m_heal.init();
+	}
+	
+	public void useSkill(int nID) {
+		switch(nID) {
+			default:
+				break;
+			case 1: 
+				if(isSkillA()) return;
+				else if(!useMana(20)) return;
+				int eHP;
+				try
+				{
+					eHP = Main.GetCurrentEnemy().getHP();
+					eHP -= 50; //getStrength()
+					Main.GetCurrentEnemy().setHP(eHP);
+					setSkillA(true);
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				break;
+			case 2:
+				if(isSkillB()) return;
+				else if(!useMana(40)) return;
+				regen(30, 0);
+				setSkillB(true);
+				break;
+			case 3:
+				if(isSkillC()) return;
+				else if(!useMana(40)) return;
+				try
+				{
+					//halbiere gegner schaden
+					//bis zum tod
+				} catch (Exception e)
+				{
+					e.printStackTrace();
+				}
+				setSkillC(true);
+				break;
+			case 4:
+				if(isSkillD()) return;
+				else if(!useMana(100)) return;
+				bBerserk = true;
+				nStrength *= 2;
+				nHP *= 2;
+				nMP *= 2;
+				regen(70, 10);
+				setSkillD(true);
+				break;
+		}
+	}
+
+	public boolean isBerserk()
+	{
+		return bBerserk;
+	}
+
+	public void setBerserk(boolean bBerserk)
+	{
+		this.bBerserk = bBerserk;
+	}
+
+	public int getBerserkCD()
+	{
+		return nBerserkCD;
+	}
+
+	public void setBerserkCD(int nBerserkCD)
+	{
+		this.nBerserkCD = nBerserkCD;
+	}
+
+	public int getSkillACD()
+	{
+		return nSkillACD;
+	}
+
+	public void setSkillACD(int nSkillACD)
+	{
+		this.nSkillACD = nSkillACD;
+	}
+
+	public int getSkillBCD()
+	{
+		return nSkillBCD;
+	}
+
+	public void setSkillBCD(int nSkillBCD)
+	{
+		this.nSkillBCD = nSkillBCD;
+	}
+
+	public int getSkillCCD()
+	{
+		return nSkillCCD;
+	}
+
+	public void setSkillCCD(int nSkillCCD)
+	{
+		this.nSkillCCD = nSkillCCD;
+	}
+
+	public int getSkillDCD()
+	{
+		return nSkillDCD;
+	}
+
+	public void setSkillDCD(int nSkillDCD)
+	{
+		this.nSkillDCD = nSkillDCD;
+	}
+
+	public boolean isSkillA()
+	{
+		return bSkillA;
+	}
+
+	public void setSkillA(boolean bSkillA)
+	{
+		this.bSkillA = bSkillA;
+	}
+
+	public boolean isSkillB()
+	{
+		return bSkillB;
+	}
+
+	public void setSkillB(boolean bSkillB)
+	{
+		this.bSkillB = bSkillB;
+	}
+
+	public boolean isSkillC()
+	{
+		return bSkillC;
+	}
+
+	public void setSkillC(boolean bSkillC)
+	{
+		this.bSkillC = bSkillC;
+	}
+
+	public boolean isSkillD()
+	{
+		return bSkillD;
+	}
+
+	public void setSkillD(boolean bSkillD)
+	{
+		this.bSkillD = bSkillD;
 	}
 }
