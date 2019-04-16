@@ -40,5 +40,6 @@
 			  </manifest>
 		</jar>
 		<delete dir="${bin}"/>
+		<java jar="${INSTALL}/${ant.project.name}.jar" fork="true"/>
 	</target>
 </project>

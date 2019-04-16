@@ -1,7 +1,5 @@
 package de.destiny19.game;
 
-//import java.awt.BorderLayout;
-
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -13,7 +11,6 @@ import de.destiny19.scenes.GameScene;
 import de.destiny19.scenes.PauseScene;
 import de.destiny19.scenes.TitleScene;
 import java.awt.CardLayout;
-import java.awt.image.BufferStrategy;
 
 @SuppressWarnings("serial")
 public class Frame extends JFrame {

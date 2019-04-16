@@ -5,8 +5,6 @@ import de.destiny19.scenes.GameScene;
 import de.destiny19.scenes.PauseScene;
 import de.destiny19.scenes.TitleScene;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;

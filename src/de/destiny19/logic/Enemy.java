@@ -13,7 +13,7 @@ public class Enemy {
 		setMaxHp(100);
 		setAtkSpeed(120); //1s 
 		m_nDmg = 5;
-		scale(nLevel);
+		scale(nLevel-1);
 		setTimer(new Timer() {
 			@Override
 			public void doAction() {

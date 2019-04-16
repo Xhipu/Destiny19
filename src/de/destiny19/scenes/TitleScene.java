@@ -1,6 +1,5 @@
 package de.destiny19.scenes;
 
-//import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -49,7 +48,7 @@ public class TitleScene extends JPanel {
 		bnnew.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent me) {
-				Main.SetPlayer(new Player(1, 100, 0, 100, 100, 100, 100, 1));
+				Main.SetPlayer(new Player(1, 20, 0, 100, 100, 100, 100, 3));
 				Main.mainframe.game.inv		= new PlayerInventory(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 				Main.GetPlayer().initTimer();
 				parent.setScene(Main.GAMESTATE.GAME);
