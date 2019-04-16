@@ -388,4 +388,8 @@ public class Player {
         }
         return strRet;
     }
+	
+	public int getStrength() {
+		return nStrength;
+	}
 }

@@ -13,6 +13,7 @@ import java.util.Iterator;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import de.destiny19.GameObjectInjector;
@@ -40,6 +41,7 @@ public class GameScene extends JPanel {
 	private Image imgBg;
 	private Picture imgPlayer, imgEnemy;
 	private ValueBar playerHp, playerMp, enemyHp;
+	private JLabel lbPlayerStats, lbEnemyStats;
 	public Player player;
 	public PlayerInventory inv;
 	public Spawner<Enemy> enemySpawn;
@@ -107,6 +109,14 @@ public class GameScene extends JPanel {
 		enemyHp.setBarColor(Color.RED);
 		enemyHp.setBgColor(Color.DARK_GRAY);
 		
+		lbPlayerStats = new JLabel();
+		lbPlayerStats.setBounds(10, 150, 330, 50);
+		lbPlayerStats.setForeground(Color.WHITE);
+		
+		lbEnemyStats = new JLabel();
+		lbEnemyStats.setBounds(10, 150, 330, 50);
+		lbEnemyStats.setForeground(Color.WHITE);
+		
 		pnSkills.add(bnSkillA);
 		pnSkills.add(bnSkillB);
 		pnSkills.add(bnSkillC);
@@ -116,6 +126,8 @@ public class GameScene extends JPanel {
 		pnPlayerStats.add(playerHp);
 		pnPlayerStats.add(playerMp);
 		pnEnemyStats.add(enemyHp);
+		pnPlayerStats.add(lbPlayerStats);
+		pnEnemyStats.add(lbEnemyStats);
 		add(bnPause);
 		add(pnEnemy);
 		add(pnEnemyStats);
@@ -186,9 +198,12 @@ public class GameScene extends JPanel {
 		playerHp.setValue(player.getHP(), player.getAktHP());
 		playerMp.setValue(player.getMP(), player.getAktMP());
 		
+		lbPlayerStats.setText(String.format("<html><p>Level: %d<br>Strength: %d</p></html>", player.getLevel(), player.getStrength()));
+		
 		try {
 			Enemy en = enemySpawn.getInstances().get(0);
 			enemyHp.setValue(en.getMaxHp(), en.getHP());
+			lbEnemyStats.setText(String.format("<html><p>Level: %d<br>Strength: %d</p></html>", en.getLevel(), en.getDmg()));
 		} catch(Exception e) {return;}
 		
 		if(player.isBerserk()) {
